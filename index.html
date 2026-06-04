@@ -3,13 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whitmanz Photography</title>
+  <title>whitmanz photography</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Georgia, 'Times New Roman', serif;
-      background-color: #f7f3ee;
-      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.95), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(220, 230, 245, 0.45), transparent 30%),
+        linear-gradient(135deg, #f8f4ee 0%, #eee6dc 48%, #f7f3ee 100%);
+      color: #1d1d1f;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      z-index: 100;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+
+    nav a {
+      margin-left: 18px;
+      text-decoration: none;
+      color: #1d1d1f;
+      opacity: 0.82;
+      transition: opacity 0.25s ease;
+    }
+
+    nav a:first-child {
+      margin-left: 0;
+    }
+
+    nav a:hover {
+      opacity: 1;
     }
 
     header {
@@ -19,107 +64,474 @@
       justify-content: center;
       text-align: center;
       padding: 40px;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 540px;
+      height: 540px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.75), rgba(255,255,255,0));
+      filter: blur(12px);
+      animation: floatGlow 8s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes floatGlow {
+      from {
+        transform: translate(-40px, -20px) scale(1);
+      }
+      to {
+        transform: translate(40px, 30px) scale(1.12);
+      }
     }
 
     h1 {
-      font-size: 56px;
-      font-weight: 400;
-      margin-bottom: 16px;
-      letter-spacing: 1px;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 500;
+      margin: 0 0 18px;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+      text-transform: lowercase;
     }
 
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      max-width: 620px;
+    .hero-text {
+      font-size: 20px;
+      line-height: 1.55;
+      max-width: 640px;
       margin: 0 auto;
-      color: #555;
-    }
-
-    nav {
-      position: fixed;
-      top: 24px;
-      right: 32px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #222;
+      color: rgba(29, 29, 31, 0.62);
+      letter-spacing: -0.02em;
     }
 
     .section {
-      padding: 80px 10%;
+      padding: 90px 8%;
     }
 
-    .section h2 {
-      font-size: 32px;
-      font-weight: 400;
-      margin-bottom: 24px;
+    .section h2,
+    .map-section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 500;
+      margin: 0 0 24px;
+      letter-spacing: -0.045em;
+      text-transform: lowercase;
     }
+
+    .section p,
+    .map-intro {
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 680px;
+      margin: 0 auto;
+      color: rgba(29, 29, 31, 0.62);
+      letter-spacing: -0.015em;
+    }
+
+    /* map section */
+
+    .map-section {
+      padding: 90px 8% 40px;
+      text-align: center;
+    }
+
+    .map-intro {
+      margin-bottom: 42px;
+    }
+
+    .world-map {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 28px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.42);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+
+    .map-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .continent {
+      fill: rgba(170, 155, 135, 0.18);
+      stroke: rgba(130, 115, 95, 0.16);
+      stroke-width: 1.2;
+    }
+
+    .place {
+      cursor: pointer;
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .place:hover {
+      transform: scale(1.35);
+    }
+
+    .dot {
+      fill: #ffffff;
+      stroke: rgba(120, 95, 70, 0.85);
+      stroke-width: 2;
+      filter:
+        drop-shadow(0 0 12px rgba(255, 255, 255, 0.95))
+        drop-shadow(0 0 18px rgba(180, 145, 105, 0.55));
+      transition: all 0.4s ease;
+    }
+
+    .place:hover .dot {
+      fill: #f6d7a7;
+      stroke: #ffffff;
+      filter:
+        drop-shadow(0 0 18px rgba(255, 235, 200, 1))
+        drop-shadow(0 0 34px rgba(200, 155, 95, 0.75));
+    }
+
+    .ripple {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.85);
+      stroke-width: 2;
+      opacity: 0;
+      transform-origin: center;
+      animation: mapRipple 2.8s ease-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    .place:hover .ripple {
+      stroke: rgba(245, 210, 160, 0.95);
+      animation-duration: 1.15s;
+    }
+
+    .place text {
+      font-size: 15px;
+      font-weight: 500;
+      fill: rgba(29, 29, 31, 0.78);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: 0.35s ease;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+    }
+
+    .place:hover text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes mapRipple {
+      0% {
+        opacity: 0.75;
+        transform: scale(0.3);
+      }
+
+      70% {
+        opacity: 0;
+        transform: scale(1.9);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(2.2);
+      }
+    }
+
+    /* portfolio section */
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 26px;
     }
 
-    .photo-box {
-      height: 280px;
-      background-color: #ddd2c6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-family: Arial, sans-serif;
+    .photo-card {
+      position: relative;
+      height: 360px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #d8cec2;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.10);
+      transform: translateZ(0);
+      cursor: pointer;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition:
+        transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.9s ease;
+    }
+
+    .photo-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.45), transparent 22%),
+        radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.25), transparent 24%),
+        linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.38), transparent 70%);
+      opacity: 0;
+      transform: translateX(-20%) rotate(8deg);
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .photo-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-radial-gradient(
+          circle at var(--x, 50%) var(--y, 50%),
+          rgba(255, 255, 255, 0.20) 0px,
+          rgba(255, 255, 255, 0.08) 6px,
+          transparent 14px,
+          transparent 28px
+        );
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.8s ease;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.08);
+      filter: contrast(1.04) saturate(1.03);
+    }
+
+    .photo-card:hover::before {
+      opacity: 1;
+      animation: liquidLight 2.8s ease-in-out infinite alternate;
+    }
+
+    .photo-card:hover::after {
+      opacity: 1;
+      transform: scale(1.25);
+      animation: rippleMove 1.8s ease-out infinite;
+    }
+
+    @keyframes liquidLight {
+      from {
+        transform: translateX(-22%) rotate(8deg);
+      }
+      to {
+        transform: translateX(18%) rotate(12deg);
+      }
+    }
+
+    @keyframes rippleMove {
+      from {
+        filter: blur(0px);
+        transform: scale(0.9);
+      }
+      to {
+        filter: blur(1.5px);
+        transform: scale(1.28);
+      }
+    }
+
+    .photo-title {
+      position: absolute;
+      left: 22px;
+      bottom: 20px;
+      z-index: 4;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: 0.5s ease;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .photo-card:hover .photo-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-section {
+      text-align: center;
     }
 
     footer {
-      padding: 40px;
+      padding: 50px;
       text-align: center;
       font-size: 14px;
-      color: #777;
+      color: rgba(29, 29, 31, 0.48);
+      letter-spacing: -0.01em;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        top: 18px;
+        right: 18px;
+        left: 18px;
+        text-align: center;
+      }
+
+      nav a {
+        margin-left: 14px;
+      }
+
+      header {
+        padding: 32px 24px;
+      }
+
+      .hero-text {
+        font-size: 18px;
+      }
+
+      .section,
+      .map-section {
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+
+      .world-map {
+        padding: 16px;
+        border-radius: 26px;
+      }
+
+      .place text {
+        font-size: 18px;
+      }
+
+      .photo-card {
+        height: 300px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <nav>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#about">About</a>
-    <a href="mailto:your-email@example.com">Contact</a>
+    <a href="#map">map</a>
+    <a href="#portfolio">portfolio</a>
+    <a href="#about">about</a>
+    <a href="mailto:your-email@example.com">contact</a>
   </nav>
 
   <header>
     <div>
-      <h1>Whitmanz Photography</h1>
-      <p>Capturing quiet moments, natural light, and visual stories through photography.</p>
+      <h1>whitmanz</h1>
+      <p class="hero-text">
+        photography portfolio of quiet moments, natural light, and visual stories.
+      </p>
     </div>
   </header>
 
-  <section class="section" id="portfolio">
-    <h2>Selected Works</h2>
-    <div class="gallery">
-      <div class="photo-box">Photo 1</div>
-      <div class="photo-box">Photo 2</div>
-      <div class="photo-box">Photo 3</div>
-      <div class="photo-box">Photo 4</div>
+  <section class="map-section" id="map">
+    <h2>places i’ve captured</h2>
+    <p class="map-intro">
+      a growing visual map of places i have photographed, traced through light, memory, and movement.
+    </p>
+
+    <div class="world-map">
+      <svg viewBox="0 0 1000 500" class="map-svg" aria-label="photography map">
+
+        <!-- simplified world map background -->
+        <path class="continent" d="M145,155 C95,170 80,220 120,250 C160,285 210,260 230,220 C250,175 205,140 145,155 Z" />
+        <path class="continent" d="M250,250 C220,300 245,360 310,385 C365,405 400,350 375,300 C350,250 295,225 250,250 Z" />
+        <path class="continent" d="M455,140 C410,160 405,220 455,250 C510,285 580,260 600,210 C620,160 535,120 455,140 Z" />
+        <path class="continent" d="M600,170 C655,125 770,130 825,190 C875,245 830,310 740,300 C655,290 555,235 600,170 Z" />
+        <path class="continent" d="M705,325 C745,300 815,315 845,365 C875,415 820,455 760,435 C700,415 665,355 705,325 Z" />
+        <path class="continent" d="M410,285 C455,275 500,310 505,360 C510,410 465,445 420,420 C380,395 365,315 410,285 Z" />
+
+        <!-- highlighted places -->
+        <g class="place" style="--delay: 0s;">
+          <circle class="ripple" cx="720" cy="220" r="18"></circle>
+          <circle class="dot" cx="720" cy="220" r="7"></circle>
+          <text x="735" y="216">japan</text>
+        </g>
+
+        <g class="place" style="--delay: .3s;">
+          <circle class="ripple" cx="675" cy="285" r="18"></circle>
+          <circle class="dot" cx="675" cy="285" r="7"></circle>
+          <text x="690" y="281">singapore</text>
+        </g>
+
+        <g class="place" style="--delay: .6s;">
+          <circle class="ripple" cx="650" cy="225" r="18"></circle>
+          <circle class="dot" cx="650" cy="225" r="7"></circle>
+          <text x="665" y="221">china</text>
+        </g>
+
+        <g class="place" style="--delay: .9s;">
+          <circle class="ripple" cx="500" cy="185" r="18"></circle>
+          <circle class="dot" cx="500" cy="185" r="7"></circle>
+          <text x="515" y="181">europe</text>
+        </g>
+
+      </svg>
     </div>
   </section>
 
-  <section class="section" id="about">
-    <h2>About</h2>
+  <section class="section" id="portfolio">
+    <h2>selected works</h2>
+
+    <div class="gallery">
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="photography work">
+        <div class="photo-title">travel</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=80" alt="photography work">
+        <div class="photo-title">nature</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="photography work">
+        <div class="photo-title">stillness</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80" alt="photography work">
+        <div class="photo-title">landscape</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <h2>about</h2>
     <p>
-      This is a personal photography portfolio featuring selected works across travel,
+      this is a personal photography portfolio featuring selected works across travel,
       portraits, street scenes, and everyday moments.
     </p>
   </section>
 
   <footer>
-    © 2026 Whitmanz Photography
+    © 2026 whitmanz photography
   </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.photo-card');
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--x', `${x}%`);
+        card.style.setProperty('--y', `${y}%`);
+      });
+    });
+  </script>
 
 </body>
 </html>
