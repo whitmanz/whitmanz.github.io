@@ -129,9 +129,7 @@
       letter-spacing: -0.015em;
     }
 
-    /* =========================
-       PHOTO GALLERY
-    ========================= */
+    /* selected works */
 
     .gallery {
       display: grid;
@@ -254,9 +252,7 @@
       transform: translateY(0);
     }
 
-    /* =========================
-       SMOOTH PHOTO PREVIEW
-    ========================= */
+    /* smooth photo preview */
 
     .lightbox {
       position: fixed;
@@ -336,9 +332,7 @@
       background: rgba(255,255,255,0.28);
     }
 
-    /* =========================
-       BLACK WORLD MAP
-    ========================= */
+    /* black world map */
 
     .map-section {
       padding: 90px 8% 60px;
@@ -448,11 +442,12 @@
     }
 
     .map-label {
-      fill: rgba(255, 255, 255, 0.72);
+      fill: rgba(255, 255, 255, 0.76);
       font-size: 14px;
       font-weight: 500;
       letter-spacing: -0.02em;
       pointer-events: none;
+      text-transform: lowercase;
     }
 
     .map-note {
@@ -462,10 +457,6 @@
       letter-spacing: -0.01em;
       text-align: center;
     }
-
-    /* =========================
-       ABOUT + FOOTER
-    ========================= */
 
     .about-section {
       text-align: center;
@@ -556,6 +547,22 @@
     <h2>selected works</h2>
 
     <div class="gallery">
+
+      <div class="photo-card">
+        <img src="images/monaco_2.jpeg" alt="monaco photography">
+        <div class="photo-title">monaco</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/beijing_1.jpeg" alt="beijing photography">
+        <div class="photo-title">beijing</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/beijing_2.jpeg" alt="beijing photography">
+        <div class="photo-title">beijing</div>
+      </div>
+
       <div class="photo-card">
         <img src="images/kanazawa_1.jpeg" alt="kanazawa photography">
         <div class="photo-title">kanazawa</div>
@@ -592,8 +599,28 @@
       </div>
 
       <div class="photo-card">
+        <img src="images/monaco_1.jpeg" alt="monaco photography">
+        <div class="photo-title">monaco</div>
+      </div>
+
+      <div class="photo-card">
         <img src="images/nagahama_1.jpeg" alt="nagahama photography">
         <div class="photo-title">nagahama</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/paris_1.jpeg" alt="paris photography">
+        <div class="photo-title">paris</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/paris_2.jpeg" alt="paris photography">
+        <div class="photo-title">paris</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/paris_3.jpeg" alt="paris photography">
+        <div class="photo-title">paris</div>
       </div>
 
       <div class="photo-card">
@@ -610,19 +637,20 @@
         <img src="images/xian_1.jpeg" alt="xi'an photography">
         <div class="photo-title">xi'an</div>
       </div>
+
     </div>
   </section>
 
   <section class="map-section" id="map">
     <h2>places i’ve captured</h2>
     <p class="map-intro">
-      a visual map of places i have photographed, highlighted across the world.
+      a visual map of countries i have photographed, highlighted across the world.
     </p>
 
     <div class="map-panel">
       <svg class="black-map" viewBox="0 0 1200 620" aria-label="world map">
 
-        <!-- abstract but world-map-like continents -->
+        <!-- abstract world map background -->
         <path class="land" d="M120,165 C160,105 245,82 325,110 C380,130 420,178 390,225 C365,265 305,250 270,290 C238,326 245,380 198,385 C145,390 95,335 82,282 C68,228 78,190 120,165 Z" />
         <path class="land" d="M340,330 C390,355 420,415 400,485 C382,548 325,580 300,520 C282,478 298,405 340,330 Z" />
         <path class="land" d="M515,165 C548,125 615,125 655,165 C690,200 658,244 610,238 C560,232 485,205 515,165 Z" />
@@ -631,7 +659,7 @@
         <path class="land" d="M820,365 C885,345 955,390 945,455 C935,520 850,502 812,450 C785,414 785,378 820,365 Z" />
         <path class="land" d="M910,455 C980,425 1080,452 1110,508 C1140,568 1038,595 960,570 C888,547 850,488 910,455 Z" />
 
-        <!-- subtle country borders / internal lines -->
+        <!-- white country border feel -->
         <path class="country-line" d="M170,150 C205,190 260,190 305,145" />
         <path class="country-line" d="M145,250 C220,232 295,252 355,220" />
         <path class="country-line" d="M320,350 C365,385 370,445 340,512" />
@@ -642,25 +670,23 @@
         <path class="country-line" d="M850,135 C830,195 850,255 920,325" />
         <path class="country-line" d="M825,405 C860,430 905,442 940,435" />
 
-        <!-- visited countries / regions, simplified filled shapes -->
+        <!-- highlighted countries -->
 
-        <!-- china mainland -->
+        <!-- china, including taiwan -->
         <path class="visited" d="M805,220 C845,192 905,200 932,235 C956,268 930,306 880,305 C830,305 782,278 778,250 C775,238 790,228 805,220 Z" />
-
-        <!-- taiwan -->
         <ellipse class="visited" cx="935" cy="315" rx="10" ry="22" transform="rotate(22 935 315)" />
 
         <!-- japan -->
         <path class="visited" d="M980,245 C996,258 990,278 972,270 C960,265 962,248 980,245 Z" />
         <path class="visited" d="M1005,285 C1020,296 1014,318 995,310 C982,304 988,286 1005,285 Z" />
 
-        <!-- singapore -->
-        <ellipse class="visited" cx="845" cy="382" rx="12" ry="6" />
+        <!-- france -->
+        <path class="visited" d="M560,200 C580,184 608,194 612,220 C616,248 584,262 562,245 C542,230 540,214 560,200 Z" />
 
-        <!-- united kingdom / europe marker -->
-        <path class="visited" d="M558,158 C575,140 598,150 596,172 C594,195 565,195 552,178 C548,170 550,164 558,158 Z" />
+        <!-- monaco -->
+        <ellipse class="visited" cx="612" cy="248" rx="8" ry="5" />
 
-        <!-- glowing location points -->
+        <!-- country labels + glow -->
         <circle class="map-ripple" cx="878" cy="258" r="20"></circle>
         <circle class="map-dot" cx="878" cy="258" r="6"></circle>
         <text class="map-label" x="895" y="253">china</text>
@@ -669,18 +695,18 @@
         <circle class="map-dot" cx="1000" cy="286" r="6"></circle>
         <text class="map-label" x="1018" y="282">japan</text>
 
-        <circle class="map-ripple" cx="845" cy="382" r="20"></circle>
-        <circle class="map-dot" cx="845" cy="382" r="6"></circle>
-        <text class="map-label" x="862" y="378">singapore</text>
+        <circle class="map-ripple" cx="582" cy="222" r="20"></circle>
+        <circle class="map-dot" cx="582" cy="222" r="6"></circle>
+        <text class="map-label" x="600" y="218">france</text>
 
-        <circle class="map-ripple" cx="573" cy="171" r="20"></circle>
-        <circle class="map-dot" cx="573" cy="171" r="6"></circle>
-        <text class="map-label" x="590" y="167">uk / europe</text>
+        <circle class="map-ripple" cx="612" cy="248" r="16"></circle>
+        <circle class="map-dot" cx="612" cy="248" r="5"></circle>
+        <text class="map-label" x="628" y="253">monaco</text>
 
       </svg>
 
       <div class="map-note">
-        highlighted regions represent places photographed or visited.
+        highlighted countries represent places photographed or visited.
       </div>
     </div>
   </section>
@@ -697,7 +723,6 @@
     © 2026 whitmanz photography
   </footer>
 
-  <!-- smooth image preview -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" aria-label="close preview">×</button>
     <div class="lightbox-content">
