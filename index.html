@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whitmanz Photography</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      background-color: #f7f3ee;
+      color: #222;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0 auto;
+      color: #555;
+    }
+
+    nav {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #222;
+    }
+
+    .section {
+      padding: 80px 10%;
+    }
+
+    .section h2 {
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .photo-box {
+      height: 280px;
+      background-color: #ddd2c6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-family: Arial, sans-serif;
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="mailto:your-email@example.com">Contact</a>
+  </nav>
+
+  <header>
+    <div>
+      <h1>Whitmanz Photography</h1>
+      <p>Capturing quiet moments, natural light, and visual stories through photography.</p>
+    </div>
+  </header>
+
+  <section class="section" id="portfolio">
+    <h2>Selected Works</h2>
+    <div class="gallery">
+      <div class="photo-box">Photo 1</div>
+      <div class="photo-box">Photo 2</div>
+      <div class="photo-box">Photo 3</div>
+      <div class="photo-box">Photo 4</div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About</h2>
+    <p>
+      This is a personal photography portfolio featuring selected works across travel,
+      portraits, street scenes, and everyday moments.
+    </p>
+  </section>
+
+  <footer>
+    © 2026 Whitmanz Photography
+  </footer>
+
+</body>
+</html>
