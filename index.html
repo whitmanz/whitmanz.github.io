@@ -29,7 +29,7 @@
       position: fixed;
       top: 24px;
       right: 32px;
-      z-index: 100;
+      z-index: 1000;
       padding: 12px 18px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.58);
@@ -83,6 +83,7 @@
       from {
         transform: translate(-40px, -20px) scale(1);
       }
+
       to {
         transform: translate(40px, 30px) scale(1.12);
       }
@@ -112,10 +113,10 @@
 
     .section h2,
     .map-section h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 500;
-      margin: 0 0 24px;
-      letter-spacing: -0.045em;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 600;
+      margin: 0 0 30px;
+      letter-spacing: -0.065em;
       text-transform: lowercase;
     }
 
@@ -124,135 +125,23 @@
       font-size: 18px;
       line-height: 1.7;
       max-width: 680px;
-      margin: 0 auto;
       color: rgba(29, 29, 31, 0.62);
       letter-spacing: -0.015em;
     }
 
-    /* map section */
-
-    .map-section {
-      padding: 90px 8% 40px;
-      text-align: center;
-    }
-
-    .map-intro {
-      margin-bottom: 42px;
-    }
-
-    .world-map {
-      max-width: 1050px;
-      margin: 0 auto;
-      padding: 28px;
-      border-radius: 36px;
-      background: rgba(255, 255, 255, 0.42);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.45);
-    }
-
-    .map-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .continent {
-      fill: rgba(170, 155, 135, 0.18);
-      stroke: rgba(130, 115, 95, 0.16);
-      stroke-width: 1.2;
-    }
-
-    .place {
-      cursor: pointer;
-      transform-box: fill-box;
-      transform-origin: center;
-      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    .place:hover {
-      transform: scale(1.35);
-    }
-
-    .dot {
-      fill: #ffffff;
-      stroke: rgba(120, 95, 70, 0.85);
-      stroke-width: 2;
-      filter:
-        drop-shadow(0 0 12px rgba(255, 255, 255, 0.95))
-        drop-shadow(0 0 18px rgba(180, 145, 105, 0.55));
-      transition: all 0.4s ease;
-    }
-
-    .place:hover .dot {
-      fill: #f6d7a7;
-      stroke: #ffffff;
-      filter:
-        drop-shadow(0 0 18px rgba(255, 235, 200, 1))
-        drop-shadow(0 0 34px rgba(200, 155, 95, 0.75));
-    }
-
-    .ripple {
-      fill: none;
-      stroke: rgba(255, 255, 255, 0.85);
-      stroke-width: 2;
-      opacity: 0;
-      transform-origin: center;
-      animation: mapRipple 2.8s ease-out infinite;
-      animation-delay: var(--delay);
-    }
-
-    .place:hover .ripple {
-      stroke: rgba(245, 210, 160, 0.95);
-      animation-duration: 1.15s;
-    }
-
-    .place text {
-      font-size: 15px;
-      font-weight: 500;
-      fill: rgba(29, 29, 31, 0.78);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: 0.35s ease;
-      pointer-events: none;
-      letter-spacing: -0.02em;
-    }
-
-    .place:hover text {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes mapRipple {
-      0% {
-        opacity: 0.75;
-        transform: scale(0.3);
-      }
-
-      70% {
-        opacity: 0;
-        transform: scale(1.9);
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(2.2);
-      }
-    }
-
-    /* portfolio section */
+    /* =========================
+       PHOTO GALLERY
+    ========================= */
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 26px;
     }
 
     .photo-card {
       position: relative;
-      height: 360px;
+      height: 380px;
       border-radius: 28px;
       overflow: hidden;
       background: #d8cec2;
@@ -326,6 +215,7 @@
       from {
         transform: translateX(-22%) rotate(8deg);
       }
+
       to {
         transform: translateX(18%) rotate(12deg);
       }
@@ -336,6 +226,7 @@
         filter: blur(0px);
         transform: scale(0.9);
       }
+
       to {
         filter: blur(1.5px);
         transform: scale(1.28);
@@ -348,7 +239,7 @@
       bottom: 20px;
       z-index: 4;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 650;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: white;
@@ -363,8 +254,225 @@
       transform: translateY(0);
     }
 
+    /* =========================
+       SMOOTH PHOTO PREVIEW
+    ========================= */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: rgba(10, 10, 12, 0.58);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.42s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: min(92vw, 1180px);
+      max-height: 86vh;
+      transform: scale(0.94) translateY(18px);
+      opacity: 0;
+      transition:
+        transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.45s ease;
+    }
+
+    .lightbox.active .lightbox-content {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .lightbox img {
+      display: block;
+      max-width: 100%;
+      max-height: 82vh;
+      border-radius: 30px;
+      object-fit: contain;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+    }
+
+    .lightbox-caption {
+      margin-top: 16px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      text-transform: lowercase;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 28px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.18);
+      color: white;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .lightbox-close:hover {
+      transform: scale(1.08);
+      background: rgba(255,255,255,0.28);
+    }
+
+    /* =========================
+       BLACK WORLD MAP
+    ========================= */
+
+    .map-section {
+      padding: 90px 8% 60px;
+    }
+
+    .map-intro {
+      margin: -10px 0 42px 0;
+    }
+
+    .map-panel {
+      position: relative;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.18), transparent 25%),
+        radial-gradient(circle at 82% 68%, rgba(211, 177, 111, 0.18), transparent 22%),
+        linear-gradient(145deg, #050505 0%, #111113 45%, #050505 100%);
+      box-shadow:
+        0 38px 100px rgba(0, 0, 0, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .map-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 25%, rgba(255,255,255,0.06), transparent 62%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .black-map {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .land {
+      fill: #171717;
+      stroke: rgba(255, 255, 255, 0.72);
+      stroke-width: 1.2;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .country-line {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.35);
+      stroke-width: 0.85;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .visited {
+      fill: #d6b16a;
+      stroke: rgba(255, 255, 255, 0.92);
+      stroke-width: 1.1;
+      filter:
+        drop-shadow(0 0 10px rgba(214, 177, 106, 0.62))
+        drop-shadow(0 0 22px rgba(214, 177, 106, 0.36));
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), fill 0.35s ease;
+      transform-box: fill-box;
+      transform-origin: center;
+      cursor: pointer;
+    }
+
+    .visited:hover {
+      fill: #f3d99c;
+      transform: scale(1.08);
+    }
+
+    .map-dot {
+      fill: #fff5da;
+      stroke: #ffffff;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 14px rgba(255, 236, 190, 0.9));
+    }
+
+    .map-ripple {
+      fill: none;
+      stroke: rgba(243, 217, 156, 0.82);
+      stroke-width: 2;
+      opacity: 0;
+      animation: countryRipple 2.2s ease-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes countryRipple {
+      0% {
+        opacity: 0.75;
+        transform: scale(0.4);
+      }
+
+      75% {
+        opacity: 0;
+        transform: scale(1.8);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(2.2);
+      }
+    }
+
+    .map-label {
+      fill: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      pointer-events: none;
+    }
+
+    .map-note {
+      margin-top: 22px;
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    /* =========================
+       ABOUT + FOOTER
+    ========================= */
+
     .about-section {
       text-align: center;
+    }
+
+    .about-section p {
+      margin: 0 auto;
     }
 
     footer {
@@ -401,17 +509,26 @@
         padding-right: 6%;
       }
 
-      .world-map {
-        padding: 16px;
-        border-radius: 26px;
-      }
-
-      .place text {
-        font-size: 18px;
-      }
-
       .photo-card {
         height: 300px;
+      }
+
+      .map-panel {
+        padding: 18px;
+        border-radius: 28px;
+      }
+
+      .lightbox {
+        padding: 18px;
+      }
+
+      .lightbox img {
+        border-radius: 22px;
+      }
+
+      .lightbox-close {
+        top: 18px;
+        right: 18px;
       }
     }
   </style>
@@ -420,8 +537,8 @@
 <body>
 
   <nav>
-    <a href="#map">map</a>
     <a href="#portfolio">portfolio</a>
+    <a href="#map">map</a>
     <a href="#about">about</a>
     <a href="mailto:your-email@example.com">contact</a>
   </nav>
@@ -435,124 +552,159 @@
     </div>
   </header>
 
-  <section class="map-section" id="map">
-    <h2>places i’ve captured</h2>
-    <p class="map-intro">
-      a growing visual map of places i have photographed, traced through light, memory, and movement.
-    </p>
+  <section class="section" id="portfolio">
+    <h2>selected works</h2>
 
-    <div class="world-map">
-      <svg viewBox="0 0 1000 500" class="map-svg" aria-label="photography map">
+    <div class="gallery">
+      <div class="photo-card">
+        <img src="images/kanazawa_1.jpeg" alt="kanazawa photography">
+        <div class="photo-title">kanazawa</div>
+      </div>
 
-        <!-- simplified world map background -->
-        <path class="continent" d="M145,155 C95,170 80,220 120,250 C160,285 210,260 230,220 C250,175 205,140 145,155 Z" />
-        <path class="continent" d="M250,250 C220,300 245,360 310,385 C365,405 400,350 375,300 C350,250 295,225 250,250 Z" />
-        <path class="continent" d="M455,140 C410,160 405,220 455,250 C510,285 580,260 600,210 C620,160 535,120 455,140 Z" />
-        <path class="continent" d="M600,170 C655,125 770,130 825,190 C875,245 830,310 740,300 C655,290 555,235 600,170 Z" />
-        <path class="continent" d="M705,325 C745,300 815,315 845,365 C875,415 820,455 760,435 C700,415 665,355 705,325 Z" />
-        <path class="continent" d="M410,285 C455,275 500,310 505,360 C510,410 465,445 420,420 C380,395 365,315 410,285 Z" />
+      <div class="photo-card">
+        <img src="images/kanazawa_2.jpeg" alt="kanazawa photography">
+        <div class="photo-title">kanazawa</div>
+      </div>
 
-        <!-- highlighted places -->
-        <g class="place" style="--delay: 0s;">
-          <circle class="ripple" cx="720" cy="220" r="18"></circle>
-          <circle class="dot" cx="720" cy="220" r="7"></circle>
-          <text x="735" y="216">japan</text>
-        </g>
+      <div class="photo-card">
+        <img src="images/kyoto_1.jpeg" alt="kyoto photography">
+        <div class="photo-title">kyoto</div>
+      </div>
 
-        <g class="place" style="--delay: .3s;">
-          <circle class="ripple" cx="675" cy="285" r="18"></circle>
-          <circle class="dot" cx="675" cy="285" r="7"></circle>
-          <text x="690" y="281">singapore</text>
-        </g>
+      <div class="photo-card">
+        <img src="images/kyoto_2.jpeg" alt="kyoto photography">
+        <div class="photo-title">kyoto</div>
+      </div>
 
-        <g class="place" style="--delay: .6s;">
-          <circle class="ripple" cx="650" cy="225" r="18"></circle>
-          <circle class="dot" cx="650" cy="225" r="7"></circle>
-          <text x="665" y="221">china</text>
-        </g>
+      <div class="photo-card">
+        <img src="images/kyoto_3.jpeg" alt="kyoto photography">
+        <div class="photo-title">kyoto</div>
+      </div>
 
-        <g class="place" style="--delay: .9s;">
-          <circle class="ripple" cx="500" cy="185" r="18"></circle>
-          <circle class="dot" cx="500" cy="185" r="7"></circle>
-          <text x="515" y="181">europe</text>
-        </g>
+      <div class="photo-card">
+        <img src="images/kyoto_4.jpeg" alt="kyoto photography">
+        <div class="photo-title">kyoto</div>
+      </div>
 
-      </svg>
+      <div class="photo-card">
+        <img src="images/kyoto_5.jpeg" alt="kyoto photography">
+        <div class="photo-title">kyoto</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/nagahama_1.jpeg" alt="nagahama photography">
+        <div class="photo-title">nagahama</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/shimonada_1.jpeg" alt="shimonada photography">
+        <div class="photo-title">shimonada</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/takayama_1.jpeg" alt="takayama photography">
+        <div class="photo-title">takayama</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="images/xian_1.jpeg" alt="xi'an photography">
+        <div class="photo-title">xi'an</div>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="portfolio">
-  <h2>selected works</h2>
+  <section class="map-section" id="map">
+    <h2>places i’ve captured</h2>
+    <p class="map-intro">
+      a visual map of places i have photographed, highlighted across the world.
+    </p>
 
-  <div class="gallery">
-    <div class="photo-card">
-      <img src="images/kanazawa_1.jpeg" alt="kanazawa photography">
-      <div class="photo-title">kanazawa</div>
-    </div>
+    <div class="map-panel">
+      <svg class="black-map" viewBox="0 0 1200 620" aria-label="world map">
 
-    <div class="photo-card">
-      <img src="images/kanazawa_2.jpeg" alt="kanazawa photography">
-      <div class="photo-title">kanazawa</div>
-    </div>
+        <!-- abstract but world-map-like continents -->
+        <path class="land" d="M120,165 C160,105 245,82 325,110 C380,130 420,178 390,225 C365,265 305,250 270,290 C238,326 245,380 198,385 C145,390 95,335 82,282 C68,228 78,190 120,165 Z" />
+        <path class="land" d="M340,330 C390,355 420,415 400,485 C382,548 325,580 300,520 C282,478 298,405 340,330 Z" />
+        <path class="land" d="M515,165 C548,125 615,125 655,165 C690,200 658,244 610,238 C560,232 485,205 515,165 Z" />
+        <path class="land" d="M575,270 C650,262 705,315 708,390 C712,485 642,535 590,468 C548,414 525,302 575,270 Z" />
+        <path class="land" d="M665,160 C750,92 930,102 1035,190 C1120,262 1058,350 938,328 C858,313 822,370 735,330 C650,290 610,210 665,160 Z" />
+        <path class="land" d="M820,365 C885,345 955,390 945,455 C935,520 850,502 812,450 C785,414 785,378 820,365 Z" />
+        <path class="land" d="M910,455 C980,425 1080,452 1110,508 C1140,568 1038,595 960,570 C888,547 850,488 910,455 Z" />
 
-    <div class="photo-card">
-      <img src="images/kyoto_1.jpeg" alt="kyoto photography">
-      <div class="photo-title">kyoto</div>
-    </div>
+        <!-- subtle country borders / internal lines -->
+        <path class="country-line" d="M170,150 C205,190 260,190 305,145" />
+        <path class="country-line" d="M145,250 C220,232 295,252 355,220" />
+        <path class="country-line" d="M320,350 C365,385 370,445 340,512" />
+        <path class="country-line" d="M555,158 C570,190 602,210 642,200" />
+        <path class="country-line" d="M590,284 C615,340 610,405 585,465" />
+        <path class="country-line" d="M690,178 C755,210 840,202 928,170" />
+        <path class="country-line" d="M745,290 C825,270 905,300 995,318" />
+        <path class="country-line" d="M850,135 C830,195 850,255 920,325" />
+        <path class="country-line" d="M825,405 C860,430 905,442 940,435" />
 
-    <div class="photo-card">
-      <img src="images/kyoto_2.jpeg" alt="kyoto photography">
-      <div class="photo-title">kyoto</div>
-    </div>
+        <!-- visited countries / regions, simplified filled shapes -->
 
-    <div class="photo-card">
-      <img src="images/kyoto_3.jpeg" alt="kyoto photography">
-      <div class="photo-title">kyoto</div>
-    </div>
+        <!-- china mainland -->
+        <path class="visited" d="M805,220 C845,192 905,200 932,235 C956,268 930,306 880,305 C830,305 782,278 778,250 C775,238 790,228 805,220 Z" />
 
-    <div class="photo-card">
-      <img src="images/kyoto_4.jpeg" alt="kyoto photography">
-      <div class="photo-title">kyoto</div>
-    </div>
+        <!-- taiwan -->
+        <ellipse class="visited" cx="935" cy="315" rx="10" ry="22" transform="rotate(22 935 315)" />
 
-    <div class="photo-card">
-      <img src="images/kyoto_5.jpeg" alt="kyoto photography">
-      <div class="photo-title">kyoto</div>
-    </div>
+        <!-- japan -->
+        <path class="visited" d="M980,245 C996,258 990,278 972,270 C960,265 962,248 980,245 Z" />
+        <path class="visited" d="M1005,285 C1020,296 1014,318 995,310 C982,304 988,286 1005,285 Z" />
 
-    <div class="photo-card">
-      <img src="images/nagahama_1.jpeg" alt="nagahama photography">
-      <div class="photo-title">nagahama</div>
-    </div>
+        <!-- singapore -->
+        <ellipse class="visited" cx="845" cy="382" rx="12" ry="6" />
 
-    <div class="photo-card">
-      <img src="images/shimonada_1.jpeg" alt="shimonada photography">
-      <div class="photo-title">shimonada</div>
-    </div>
+        <!-- united kingdom / europe marker -->
+        <path class="visited" d="M558,158 C575,140 598,150 596,172 C594,195 565,195 552,178 C548,170 550,164 558,158 Z" />
 
-    <div class="photo-card">
-      <img src="images/takayama_1.jpeg" alt="takayama photography">
-      <div class="photo-title">takayama</div>
-    </div>
+        <!-- glowing location points -->
+        <circle class="map-ripple" cx="878" cy="258" r="20"></circle>
+        <circle class="map-dot" cx="878" cy="258" r="6"></circle>
+        <text class="map-label" x="895" y="253">china</text>
 
-    <div class="photo-card">
-      <img src="images/xian_1.jpeg" alt="xi'an photography">
-      <div class="photo-title">xi'an</div>
+        <circle class="map-ripple" cx="1000" cy="286" r="20"></circle>
+        <circle class="map-dot" cx="1000" cy="286" r="6"></circle>
+        <text class="map-label" x="1018" y="282">japan</text>
+
+        <circle class="map-ripple" cx="845" cy="382" r="20"></circle>
+        <circle class="map-dot" cx="845" cy="382" r="6"></circle>
+        <text class="map-label" x="862" y="378">singapore</text>
+
+        <circle class="map-ripple" cx="573" cy="171" r="20"></circle>
+        <circle class="map-dot" cx="573" cy="171" r="6"></circle>
+        <text class="map-label" x="590" y="167">uk / europe</text>
+
+      </svg>
+
+      <div class="map-note">
+        highlighted regions represent places photographed or visited.
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section class="section about-section" id="about">
     <h2>about</h2>
     <p>
       this is a personal photography portfolio featuring selected works across travel,
-      portraits, street scenes, and everyday moments.
+      street scenes, landscapes, and everyday moments.
     </p>
   </section>
 
   <footer>
     © 2026 whitmanz photography
   </footer>
+
+  <!-- smooth image preview -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="close preview">×</button>
+    <div class="lightbox-content">
+      <img id="lightboxImage" src="" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
 
   <script>
     const cards = document.querySelectorAll('.photo-card');
@@ -565,6 +717,47 @@
         card.style.setProperty('--x', `${x}%`);
         card.style.setProperty('--y', `${y}%`);
       });
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        const title = card.querySelector('.photo-title')?.textContent || 'photography';
+
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+        lightboxCaption.textContent = title;
+
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        lightboxImage.src = '';
+      }, 350);
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
     });
   </script>
 
