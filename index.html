@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" as="image" href="images/monaco_2.jpeg" fetchpriority="high">
   <title>whitmanzhou photography</title>
 
   <style>
@@ -16,7 +17,10 @@
       --line: rgba(29, 29, 31, 0.12);
       --glass: rgba(255, 255, 255, 0.68);
       --soft: #f5f5f7;
-      --accent: #0071e3;
+      --accent: #8f7b5d;
+      --accent-cool: #9ba3ad;
+      --platinum: #e7e4df;
+      --titanium: #b9b5ae;
       --hero-photo: url("images/monaco_2.jpeg");
     }
 
@@ -28,7 +32,9 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      background: #f5f5f7;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(231, 228, 223, 0.68) 38%, rgba(245, 245, 247, 1) 74%),
+        #f5f5f7;
       color: var(--ink);
       overflow-x: hidden;
     }
@@ -48,8 +54,8 @@
       padding: 7px;
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.68);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(224, 222, 218, 0.68));
+      box-shadow: 0 18px 50px rgba(65, 58, 48, 0.10);
       transform: translateX(-50%);
       backdrop-filter: blur(22px) saturate(1.6);
       -webkit-backdrop-filter: blur(22px) saturate(1.6);
@@ -84,17 +90,16 @@
       overflow: hidden;
       text-align: center;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(245,245,247,0.58) 50%, rgba(245,245,247,0.96)),
-        linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)),
+        linear-gradient(180deg, rgba(242,240,236,0.72), rgba(231,228,223,0.50) 46%, rgba(245,245,247,0.96)),
+        linear-gradient(rgba(49, 44, 36, 0.18), rgba(49, 44, 36, 0.18)),
         var(--hero-photo) center / cover no-repeat;
-      transition: background-image 0.6s ease;
     }
 
     header::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(245, 245, 247, 0.22);
+      background: linear-gradient(135deg, rgba(255,255,255,0.20), rgba(183,179,170,0.18));
       pointer-events: none;
     }
 
@@ -301,32 +306,24 @@
     }
 
     .map-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.55fr);
-      gap: 28px;
-      align-items: stretch;
-      max-width: 1220px;
+      max-width: 1120px;
       margin: 42px auto 0;
     }
 
-    .map-panel,
-    .country-preview {
+    .map-panel {
       border: 1px solid rgba(0, 0, 0, 0.07);
       border-radius: 28px;
-      background: #f5f5f7;
       overflow: hidden;
     }
 
     .map-panel {
       position: relative;
       aspect-ratio: 16 / 10;
-      min-height: 520px;
-      padding: 24px;
+      min-height: 500px;
+      padding: 28px;
       background:
-        linear-gradient(rgba(255, 255, 255, 0.45) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.45) 1px, transparent 1px),
-        linear-gradient(180deg, #f8f8fa, #eef0f3);
-      background-size: 78px 78px;
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.92), transparent 26%),
+        linear-gradient(135deg, #f7f6f3, #ebe8e2 52%, #f7f7f8);
     }
 
     .world-map {
@@ -341,16 +338,25 @@
     }
 
     .map-land {
-      fill: #d8dde4;
-      stroke: rgba(29, 29, 31, 0.12);
-      stroke-width: 1.1;
+      fill: rgba(255, 255, 255, 0.22);
+      stroke: rgba(112, 104, 91, 0.58);
+      stroke-width: 2;
       vector-effect: non-scaling-stroke;
     }
 
-    .map-graticule {
+    .map-mesh {
       fill: none;
-      stroke: rgba(29, 29, 31, 0.08);
-      stroke-width: 0.8;
+      stroke: rgba(112, 104, 91, 0.42);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .map-visited {
+      fill: rgba(143, 123, 93, 0.24);
+      stroke: rgba(121, 100, 71, 0.72);
+      stroke-width: 1.6;
       vector-effect: non-scaling-stroke;
     }
 
@@ -361,9 +367,9 @@
       gap: 7px;
       border: 0;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      color: rgba(29, 29, 31, 0.74);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+      background: rgba(255, 255, 255, 0.62);
+      color: rgba(75, 68, 58, 0.82);
+      box-shadow: 0 12px 28px rgba(75, 68, 58, 0.12);
       cursor: pointer;
       font: inherit;
       font-size: 13px;
@@ -383,7 +389,7 @@
       height: 9px;
       border-radius: 999px;
       background: currentColor;
-      box-shadow: 0 0 0 5px rgba(0, 113, 227, 0.12);
+      box-shadow: 0 0 0 5px rgba(143, 123, 93, 0.14);
     }
 
     .country-hotspot:hover,
@@ -392,74 +398,53 @@
       color: var(--accent);
       outline: none;
       transform: translate(-50%, -50%) scale(1.06);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.14);
+      box-shadow: 0 18px 38px rgba(75, 68, 58, 0.16);
     }
 
     .country-hotspot.is-selected {
-      background: var(--accent);
+      background: linear-gradient(135deg, #a28b68, #7f715f);
       color: #fff;
     }
 
     .country-hotspot.is-selected::before {
-      box-shadow: 0 0 0 6px rgba(0, 113, 227, 0.18);
-    }
-
-    .country-preview {
-      display: flex;
-      flex-direction: column;
-      min-height: 520px;
-      padding: 18px;
-    }
-
-    .preview-top {
-      padding: 6px 6px 18px;
-    }
-
-    .preview-kicker {
-      margin: 0 0 8px;
-      color: rgba(29, 29, 31, 0.5);
-      font-size: 13px;
-      font-weight: 650;
-      text-transform: lowercase;
-    }
-
-    .country-preview h3 {
-      margin: 0;
-      font-size: 34px;
-      font-weight: 650;
-      letter-spacing: 0;
-      line-height: 1;
-      text-transform: lowercase;
-    }
-
-    .country-preview p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.42;
+      box-shadow: 0 0 0 6px rgba(143, 123, 93, 0.18);
     }
 
     .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px;
-      margin-top: auto;
+      position: absolute;
+      left: var(--preview-left, 50%);
+      top: var(--preview-top, 50%);
+      z-index: 4;
+      display: flex;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, calc(-100% - 18px)) scale(0.96);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .preview-grid.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, calc(-100% - 18px)) scale(1);
     }
 
     .preview-thumb {
       position: relative;
-      aspect-ratio: 1 / 1;
+      width: 74px;
+      height: 74px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      background: #dedede;
+      background: transparent;
+      box-shadow: 0 14px 30px rgba(55, 48, 38, 0.24);
       cursor: pointer;
       padding: 0;
     }
 
     .preview-thumb:first-child {
-      grid-column: span 2;
-      aspect-ratio: 16 / 10;
+      width: 96px;
+      height: 74px;
     }
 
     .preview-thumb img {
@@ -603,12 +588,7 @@
         transform: none;
       }
 
-      .map-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .map-panel,
-      .country-preview {
+      .map-panel {
         min-height: auto;
         border-radius: 22px;
       }
@@ -619,7 +599,9 @@
       }
 
       .preview-grid {
-        margin-top: 26px;
+        max-width: calc(100% - 24px);
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   </style>
@@ -652,92 +634,92 @@
       <div class="photo-stage" aria-label="horizontal photography gallery">
         <div class="gallery">
           <button class="photo-card" data-country="monaco" data-city="monaco">
-            <img src="images/monaco_2.jpeg" alt="monaco photography">
+            <img loading="eager" decoding="async" fetchpriority="high" src="images/monaco_2.jpeg" alt="monaco photography">
             <span class="photo-title">monaco</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="beijing">
-            <img src="images/beijing_1.jpeg" alt="beijing photography">
+            <img loading="lazy" decoding="async" src="images/beijing_1.jpeg" alt="beijing photography">
             <span class="photo-title">beijing</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="beijing">
-            <img src="images/beijing_2.jpeg" alt="beijing photography">
+            <img loading="lazy" decoding="async" src="images/beijing_2.jpeg" alt="beijing photography">
             <span class="photo-title">beijing</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kanazawa">
-            <img src="images/kanazawa_1.jpeg" alt="kanazawa photography">
+            <img loading="lazy" decoding="async" src="images/kanazawa_1.jpeg" alt="kanazawa photography">
             <span class="photo-title">kanazawa</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kanazawa">
-            <img src="images/kanazawa_2.jpeg" alt="kanazawa photography">
+            <img loading="lazy" decoding="async" src="images/kanazawa_2.jpeg" alt="kanazawa photography">
             <span class="photo-title">kanazawa</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img src="images/kyoto_1.jpeg" alt="kyoto photography">
+            <img loading="lazy" decoding="async" src="images/kyoto_1.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img src="images/kyoto_2.jpeg" alt="kyoto photography">
+            <img loading="lazy" decoding="async" src="images/kyoto_2.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img src="images/kyoto_3.jpeg" alt="kyoto photography">
+            <img loading="lazy" decoding="async" src="images/kyoto_3.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img src="images/kyoto_4.jpeg" alt="kyoto photography">
+            <img loading="lazy" decoding="async" src="images/kyoto_4.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img src="images/kyoto_5.jpeg" alt="kyoto photography">
+            <img loading="lazy" decoding="async" src="images/kyoto_5.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="monaco" data-city="monaco">
-            <img src="images/monaco_1.jpeg" alt="monaco photography">
+            <img loading="lazy" decoding="async" src="images/monaco_1.jpeg" alt="monaco photography">
             <span class="photo-title">monaco</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="nagahama">
-            <img src="images/nagahama_1.jpeg" alt="nagahama photography">
+            <img loading="lazy" decoding="async" src="images/nagahama_1.jpeg" alt="nagahama photography">
             <span class="photo-title">nagahama</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img src="images/paris_1.jpeg" alt="paris photography">
+            <img loading="lazy" decoding="async" src="images/paris_1.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img src="images/paris_2.jpeg" alt="paris photography">
+            <img loading="lazy" decoding="async" src="images/paris_2.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img src="images/paris_3.jpeg" alt="paris photography">
+            <img loading="lazy" decoding="async" src="images/paris_3.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="shimonada">
-            <img src="images/shimonada_1.jpeg" alt="shimonada photography">
+            <img loading="lazy" decoding="async" src="images/shimonada_1.jpeg" alt="shimonada photography">
             <span class="photo-title">shimonada</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="takayama">
-            <img src="images/takayama_1.jpeg" alt="takayama photography">
+            <img loading="lazy" decoding="async" src="images/takayama_1.jpeg" alt="takayama photography">
             <span class="photo-title">takayama</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="xi'an">
-            <img src="images/xian_1.jpeg" alt="xi'an photography">
+            <img loading="lazy" decoding="async" src="images/xian_1.jpeg" alt="xi'an photography">
             <span class="photo-title">xi'an</span>
           </button>
         </div>
@@ -754,15 +736,27 @@
         <div class="map-panel">
           <div class="world-map" aria-hidden="true">
             <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid meet">
-              <path class="map-graticule" d="M90 120H1110M90 220H1110M90 320H1110M90 420H1110M90 520H1110M200 80V550M360 80V550M520 80V550M680 80V550M840 80V550M1000 80V550" />
-              <path class="map-land" d="M142,164 L183,129 L252,113 L324,130 L366,165 L387,219 L353,260 L309,256 L286,296 L313,332 L278,366 L216,356 L188,313 L134,292 L103,239 Z" />
-              <path class="map-land" d="M321,333 L366,366 L389,431 L361,512 L318,570 L285,537 L265,472 L232,424 L248,373 Z" />
-              <path class="map-land" d="M489,148 L566,115 L646,135 L693,183 L664,232 L583,245 L512,221 L452,184 Z" />
-              <path class="map-land" d="M573,250 L656,270 L719,339 L707,426 L653,510 L594,484 L558,405 L531,318 Z" />
-              <path class="map-land" d="M666,153 L781,102 L915,111 L1034,166 L1103,247 L1072,323 L969,332 L912,294 L840,338 L742,342 L674,284 L620,222 Z" />
-              <path class="map-land" d="M887,407 L947,378 L1005,412 L1021,470 L972,519 L903,501 L858,454 Z" />
-              <path class="map-land" d="M922,537 L1012,501 L1112,528 L1145,581 L1053,604 L961,585 Z" />
-              <path class="map-land" d="M402,111 L447,92 L490,112 L482,151 L430,165 L389,143 Z" />
+              <path class="map-land" d="M98,178 L152,141 L236,124 L314,148 L365,197 L335,253 L281,251 L244,296 L271,354 L214,382 L158,331 L96,298 L64,231 Z" />
+              <path class="map-mesh" d="M98,178 L236,124 L335,253 M152,141 L244,296 L365,197 M64,231 L281,251 L214,382 M158,331 L244,296 L271,354 M236,124 L314,148 L281,251" />
+              <path class="map-land" d="M282,337 L340,372 L369,444 L329,540 L285,579 L260,492 L218,428 L239,374 Z" />
+              <path class="map-mesh" d="M282,337 L369,444 L285,579 M340,372 L260,492 L329,540 M218,428 L282,337 L260,492" />
+              <path class="map-land" d="M472,165 L548,121 L636,139 L694,190 L660,241 L582,249 L512,224 L447,190 Z" />
+              <path class="map-mesh" d="M472,165 L636,139 L582,249 M548,121 L660,241 L512,224 M447,190 L582,249 L694,190 M548,121 L512,224" />
+              <path class="map-land" d="M570,259 L653,270 L721,340 L710,420 L654,506 L595,482 L553,404 L529,319 Z" />
+              <path class="map-mesh" d="M570,259 L721,340 L595,482 M653,270 L553,404 L710,420 M529,319 L653,270 L654,506" />
+              <path class="map-land" d="M661,160 L778,106 L914,113 L1039,168 L1106,247 L1070,321 L968,335 L910,294 L842,338 L742,345 L673,286 L620,223 Z" />
+              <path class="map-mesh" d="M661,160 L778,106 L742,345 M778,106 L914,113 L842,338 M914,113 L1039,168 L968,335 M1039,168 L1070,321 L910,294 M620,223 L842,338 L673,286 M742,345 L910,294 L968,335 M673,286 L778,106" />
+              <path class="map-visited" d="M560,196 L591,183 L616,203 L604,232 L570,237 L548,218 Z" />
+              <circle class="map-visited" cx="612" cy="236" r="5" />
+              <path class="map-visited" d="M804,228 L858,205 L934,224 L958,266 L922,313 L846,304 L785,270 Z" />
+              <path class="map-visited" d="M1005,242 L1023,256 L1015,279 L995,270 Z" />
+              <path class="map-visited" d="M1028,286 L1048,300 L1037,322 L1016,311 Z" />
+              <path class="map-land" d="M887,407 L947,379 L1006,413 L1022,470 L973,520 L904,501 L858,454 Z" />
+              <path class="map-mesh" d="M887,407 L1006,413 L904,501 M947,379 L973,520 L858,454 M1022,470 L887,407" />
+              <path class="map-land" d="M922,537 L1012,501 L1114,529 L1144,581 L1053,604 L961,585 Z" />
+              <path class="map-mesh" d="M922,537 L1114,529 L1053,604 M1012,501 L961,585 L1144,581" />
+              <path class="map-land" d="M403,113 L449,93 L490,114 L482,152 L429,166 L389,143 Z" />
+              <path class="map-mesh" d="M403,113 L490,114 L429,166 M449,93 L482,152 L389,143" />
             </svg>
           </div>
 
@@ -770,16 +764,8 @@
           <button class="country-hotspot" style="left: 84.5%; top: 46%;" data-country="japan" type="button">japan</button>
           <button class="country-hotspot" style="left: 48.5%; top: 37%;" data-country="france" type="button">france</button>
           <button class="country-hotspot" style="left: 50.8%; top: 40%;" data-country="monaco" type="button">monaco</button>
-        </div>
-
-        <aside class="country-preview" aria-live="polite">
-          <div class="preview-top">
-            <p class="preview-kicker">map preview</p>
-            <h3 id="countryTitle">china</h3>
-            <p id="countryMeta">beijing and xi'an</p>
-          </div>
           <div class="preview-grid" id="previewGrid"></div>
-        </aside>
+        </div>
       </div>
     </section>
 
@@ -812,10 +798,7 @@
     const lightboxCaption = document.getElementById('lightboxCaption');
     const lightboxClose = document.getElementById('lightboxClose');
     const hotspots = [...document.querySelectorAll('.country-hotspot')];
-    const countryTitle = document.getElementById('countryTitle');
-    const countryMeta = document.getElementById('countryMeta');
     const previewGrid = document.getElementById('previewGrid');
-    const heroStorageKey = 'whitmanzhou-last-preview';
 
     const photos = cards.map(card => {
       const img = card.querySelector('img');
@@ -829,15 +812,9 @@
 
     function setHeroPhoto(src) {
       document.documentElement.style.setProperty('--hero-photo', `url("${src}")`);
-      try {
-        localStorage.setItem(heroStorageKey, src);
-      } catch (error) {
-        // The page still works if browser storage is unavailable.
-      }
     }
 
     function openLightbox(photo) {
-      setHeroPhoto(photo.src);
       lightboxImage.src = photo.src;
       lightboxImage.alt = photo.alt;
       lightboxCaption.textContent = photo.city;
@@ -899,45 +876,46 @@
       stage.scrollLeft += event.deltaY;
     }, { passive: false });
 
-    function formatPlaces(countryPhotos) {
-      const cities = [...new Set(countryPhotos.map(photo => photo.city))];
-      return cities.length > 1
-        ? `${cities.slice(0, -1).join(', ')} and ${cities.at(-1)}`
-        : cities[0];
-    }
-
-    function showCountry(country, options = { updateHero: true }) {
+    function showCountry(country, hotspot) {
       const countryPhotos = photos.filter(photo => photo.country === country);
 
       hotspots.forEach(hotspot => {
         hotspot.classList.toggle('is-selected', hotspot.dataset.country === country);
       });
 
-      countryTitle.textContent = country;
-      countryMeta.textContent = formatPlaces(countryPhotos);
       previewGrid.innerHTML = '';
+      previewGrid.classList.remove('is-visible');
 
-      if (options.updateHero && countryPhotos[0]) {
+      if (countryPhotos[0]) {
         setHeroPhoto(countryPhotos[0].src);
       }
 
-      countryPhotos.slice(0, 5).forEach(photo => {
+      if (hotspot) {
+        previewGrid.style.setProperty('--preview-left', hotspot.style.left);
+        previewGrid.style.setProperty('--preview-top', hotspot.style.top);
+      }
+
+      countryPhotos.slice(0, 4).forEach(photo => {
         const button = document.createElement('button');
         button.className = 'preview-thumb';
         button.type = 'button';
         button.setAttribute('aria-label', `open ${photo.city} photo`);
-        button.innerHTML = `<img src="${photo.src}" alt="${photo.alt}">`;
+        button.innerHTML = `<img loading="lazy" decoding="async" src="${photo.src}" alt="${photo.alt}">`;
         button.addEventListener('click', () => openLightbox(photo));
         previewGrid.appendChild(button);
+      });
+
+      requestAnimationFrame(() => {
+        previewGrid.classList.add('is-visible');
       });
     }
 
     hotspots.forEach(hotspot => {
-      hotspot.addEventListener('click', () => showCountry(hotspot.dataset.country));
+      hotspot.addEventListener('click', () => showCountry(hotspot.dataset.country, hotspot));
       hotspot.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          showCountry(hotspot.dataset.country);
+          showCountry(hotspot.dataset.country, hotspot);
         }
       });
     });
@@ -954,16 +932,6 @@
       }
     });
 
-    try {
-      const savedHeroPhoto = localStorage.getItem(heroStorageKey);
-      if (savedHeroPhoto) {
-        setHeroPhoto(savedHeroPhoto);
-      }
-    } catch (error) {
-      setHeroPhoto('images/monaco_2.jpeg');
-    }
-
-    showCountry('china', { updateHero: false });
   </script>
 </body>
 </html>
