@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>whitmanz photography</title>
+  <title>whitmanzhou photography</title>
 
   <style>
     * {
@@ -17,6 +17,7 @@
       --glass: rgba(255, 255, 255, 0.68);
       --soft: #f5f5f7;
       --accent: #0071e3;
+      --hero-photo: url("images/monaco_2.jpeg");
     }
 
     html {
@@ -83,15 +84,17 @@
       overflow: hidden;
       text-align: center;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(245,245,247,0.68) 55%, rgba(245,245,247,1)),
-        url("images/kyoto_1.jpeg") center / cover no-repeat;
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(245,245,247,0.58) 50%, rgba(245,245,247,0.96)),
+        linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)),
+        var(--hero-photo) center / cover no-repeat;
+      transition: background-image 0.6s ease;
     }
 
     header::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(245, 245, 247, 0.34);
+      background: rgba(245, 245, 247, 0.22);
       pointer-events: none;
     }
 
@@ -316,103 +319,89 @@
 
     .map-panel {
       position: relative;
-      display: grid;
-      place-items: center;
+      aspect-ratio: 16 / 10;
       min-height: 520px;
-      padding: 28px;
+      padding: 24px;
       background:
-        linear-gradient(rgba(255, 255, 255, 0.34) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.34) 1px, transparent 1px),
-        #f5f5f7;
-      background-size: 72px 72px;
+        linear-gradient(rgba(255, 255, 255, 0.45) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.45) 1px, transparent 1px),
+        linear-gradient(180deg, #f8f8fa, #eef0f3);
+      background-size: 78px 78px;
     }
 
-    .black-map {
+    .world-map {
+      position: absolute;
+      inset: 20px;
+    }
+
+    .world-map svg {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
     }
 
-    .land {
-      fill: #e4e7eb;
-      stroke: rgba(29, 29, 31, 0.18);
-      stroke-width: 1;
-      vector-effect: non-scaling-stroke;
-    }
-
-    .country-line {
-      fill: none;
-      stroke: rgba(29, 29, 31, 0.13);
-      stroke-width: 0.75;
-      vector-effect: non-scaling-stroke;
-    }
-
-    .visited {
-      fill: #222226;
-      stroke: rgba(255, 255, 255, 0.88);
+    .map-land {
+      fill: #d8dde4;
+      stroke: rgba(29, 29, 31, 0.12);
       stroke-width: 1.1;
-      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.16));
-      transform-box: fill-box;
-      transform-origin: center;
-      cursor: pointer;
-      transition: transform 0.24s ease, fill 0.24s ease;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .map-graticule {
+      fill: none;
+      stroke: rgba(29, 29, 31, 0.08);
+      stroke-width: 0.8;
+      vector-effect: non-scaling-stroke;
     }
 
     .country-hotspot {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: rgba(29, 29, 31, 0.74);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
       cursor: pointer;
-    }
-
-    .hit-zone {
-      fill: transparent;
-      pointer-events: all;
-    }
-
-    .country-hotspot:hover .visited,
-    .country-hotspot:focus .visited {
-      fill: var(--accent);
-      transform: scale(1.06);
-    }
-
-    .country-hotspot.is-selected .visited {
-      fill: var(--accent);
-    }
-
-    .map-dot {
-      fill: #ffffff;
-      stroke: #0071e3;
-      stroke-width: 2;
-      filter: drop-shadow(0 0 10px rgba(0, 113, 227, 0.42));
-      pointer-events: none;
-    }
-
-    .map-ripple {
-      fill: none;
-      stroke: rgba(0, 113, 227, 0.4);
-      stroke-width: 2;
-      opacity: 0;
-      animation: countryRipple 2.2s ease-out infinite;
-      transform-origin: center;
-      pointer-events: none;
-    }
-
-    @keyframes countryRipple {
-      0% {
-        opacity: 0.75;
-        transform: scale(0.4);
-      }
-
-      80%, 100% {
-        opacity: 0;
-        transform: scale(1.9);
-      }
-    }
-
-    .map-label {
-      fill: rgba(29, 29, 31, 0.68);
-      font-size: 14px;
+      font: inherit;
+      font-size: 13px;
       font-weight: 650;
-      pointer-events: none;
+      padding: 7px 10px 7px 8px;
       text-transform: lowercase;
+      transform: translate(-50%, -50%);
+      transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 2;
+    }
+
+    .country-hotspot::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: currentColor;
+      box-shadow: 0 0 0 5px rgba(0, 113, 227, 0.12);
+    }
+
+    .country-hotspot:hover,
+    .country-hotspot:focus {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--accent);
+      outline: none;
+      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.14);
+    }
+
+    .country-hotspot.is-selected {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .country-hotspot.is-selected::before {
+      box-shadow: 0 0 0 6px rgba(0, 113, 227, 0.18);
     }
 
     .country-preview {
@@ -522,7 +511,10 @@
     }
 
     .lightbox-content {
-      width: min(1100px, 100%);
+      display: grid;
+      justify-items: center;
+      width: auto;
+      max-width: calc(100vw - 56px);
       transform: translateY(18px) scale(0.96);
       opacity: 0;
       transition: transform 0.36s ease, opacity 0.28s ease;
@@ -535,11 +527,12 @@
 
     .lightbox img {
       display: block;
-      width: 100%;
-      max-height: 82svh;
+      width: auto;
+      height: auto;
+      max-width: calc(100vw - 96px);
+      max-height: calc(100svh - 128px);
       border-radius: 24px;
       object-fit: contain;
-      background: #e8e8ed;
       box-shadow: 0 32px 90px rgba(0, 0, 0, 0.22);
     }
 
@@ -621,6 +614,7 @@
       }
 
       .map-panel {
+        min-height: 360px;
         padding: 14px;
       }
 
@@ -642,7 +636,7 @@
   <header class="snap">
     <div class="hero-inner">
       <p class="eyebrow">photography portfolio</p>
-      <h1>whitmanz</h1>
+      <h1>whitmanzhou</h1>
       <p class="hero-text">quiet travel frames, natural light, and places remembered in small details.</p>
     </div>
     <a class="scroll-cue" href="#portfolio" aria-label="scroll to photos"></a>
@@ -758,72 +752,31 @@
 
       <div class="map-layout">
         <div class="map-panel">
-          <svg class="black-map" viewBox="0 0 1200 620" aria-label="world map">
-            <path class="land" d="M93,176 C123,138 175,122 226,137 C266,148 291,176 317,178 C351,181 370,206 357,238 C345,270 309,273 289,300 C266,331 279,368 246,392 C218,413 177,400 155,374 C132,347 122,310 98,292 C68,268 64,213 93,176 Z" />
-            <path class="land" d="M282,315 C322,330 352,370 355,420 C359,486 323,553 284,536 C250,521 252,467 229,424 C207,384 227,332 282,315 Z" />
-            <path class="land" d="M493,158 C521,124 578,113 621,139 C662,163 675,204 648,231 C619,260 563,240 528,256 C493,272 452,240 459,202 C462,185 476,174 493,158 Z" />
-            <path class="land" d="M585,263 C630,258 677,284 700,327 C727,377 713,453 667,492 C633,521 590,498 571,454 C550,406 530,342 546,300 C554,280 565,269 585,263 Z" />
-            <path class="land" d="M635,176 C683,122 762,105 841,121 C936,141 1016,178 1055,237 C1087,286 1061,335 1006,342 C949,349 917,319 871,335 C824,352 784,380 732,360 C672,337 607,278 610,225 C611,206 621,190 635,176 Z" />
-            <path class="land" d="M860,394 C895,360 953,374 977,419 C1005,472 973,520 919,512 C876,506 837,466 837,426 C837,414 845,403 860,394 Z" />
-            <path class="land" d="M932,512 C990,481 1084,499 1119,551 C1148,594 1070,612 1001,594 C943,579 899,540 932,512 Z" />
-            <path class="land" d="M402,118 C428,102 456,109 470,130 C482,148 467,170 438,169 C410,168 385,147 392,130 C394,125 397,121 402,118 Z" />
-            <path class="land" d="M1073,205 C1095,198 1121,205 1133,224 C1144,241 1130,259 1104,256 C1080,253 1059,233 1064,216 C1066,211 1069,207 1073,205 Z" />
+          <div class="world-map" aria-hidden="true">
+            <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid meet">
+              <path class="map-graticule" d="M90 120H1110M90 220H1110M90 320H1110M90 420H1110M90 520H1110M200 80V550M360 80V550M520 80V550M680 80V550M840 80V550M1000 80V550" />
+              <path class="map-land" d="M142,164 L183,129 L252,113 L324,130 L366,165 L387,219 L353,260 L309,256 L286,296 L313,332 L278,366 L216,356 L188,313 L134,292 L103,239 Z" />
+              <path class="map-land" d="M321,333 L366,366 L389,431 L361,512 L318,570 L285,537 L265,472 L232,424 L248,373 Z" />
+              <path class="map-land" d="M489,148 L566,115 L646,135 L693,183 L664,232 L583,245 L512,221 L452,184 Z" />
+              <path class="map-land" d="M573,250 L656,270 L719,339 L707,426 L653,510 L594,484 L558,405 L531,318 Z" />
+              <path class="map-land" d="M666,153 L781,102 L915,111 L1034,166 L1103,247 L1072,323 L969,332 L912,294 L840,338 L742,342 L674,284 L620,222 Z" />
+              <path class="map-land" d="M887,407 L947,378 L1005,412 L1021,470 L972,519 L903,501 L858,454 Z" />
+              <path class="map-land" d="M922,537 L1012,501 L1112,528 L1145,581 L1053,604 L961,585 Z" />
+              <path class="map-land" d="M402,111 L447,92 L490,112 L482,151 L430,165 L389,143 Z" />
+            </svg>
+          </div>
 
-            <path class="country-line" d="M147,164 C180,197 226,202 266,180" />
-            <path class="country-line" d="M113,254 C177,241 239,255 315,236" />
-            <path class="country-line" d="M269,337 C306,375 311,439 285,520" />
-            <path class="country-line" d="M516,163 C546,193 590,203 636,190" />
-            <path class="country-line" d="M573,283 C607,339 609,409 579,462" />
-            <path class="country-line" d="M654,185 C731,219 828,211 936,169" />
-            <path class="country-line" d="M720,298 C807,279 900,304 1009,332" />
-            <path class="country-line" d="M845,128 C829,196 855,258 921,333" />
-            <path class="country-line" d="M849,426 C888,452 934,466 973,452" />
-
-            <g class="country-hotspot is-selected" tabindex="0" role="button" aria-label="show china photos" data-country="china">
-              <ellipse class="hit-zone" cx="888" cy="277" rx="100" ry="78" />
-              <path class="visited" d="M817,228 C852,204 915,209 948,239 C982,270 962,318 904,322 C848,326 790,293 786,257 C784,244 800,236 817,228 Z" />
-              <ellipse class="visited" cx="958" cy="326" rx="9" ry="20" transform="rotate(23 958 326)" />
-            </g>
-
-            <g class="country-hotspot" tabindex="0" role="button" aria-label="show japan photos" data-country="japan">
-              <ellipse class="hit-zone" cx="1028" cy="293" rx="50" ry="76" />
-              <path class="visited" d="M1010,246 C1026,260 1020,280 1002,272 C989,266 992,249 1010,246 Z" />
-              <path class="visited" d="M1030,285 C1047,297 1040,320 1020,313 C1007,308 1012,289 1030,285 Z" />
-            </g>
-
-            <g class="country-hotspot" tabindex="0" role="button" aria-label="show france photos" data-country="france">
-              <ellipse class="hit-zone" cx="582" cy="226" rx="54" ry="48" />
-              <path class="visited" d="M560,200 C580,184 608,194 612,220 C616,248 584,262 562,245 C542,230 540,214 560,200 Z" />
-            </g>
-
-            <g class="country-hotspot" tabindex="0" role="button" aria-label="show monaco photos" data-country="monaco">
-              <ellipse class="hit-zone" cx="612" cy="248" rx="28" ry="22" />
-              <ellipse class="visited" cx="612" cy="248" rx="8" ry="5" />
-            </g>
-
-            <circle class="map-ripple" cx="904" cy="270" r="20"></circle>
-            <circle class="map-dot" cx="904" cy="270" r="6"></circle>
-            <text class="map-label" x="921" y="265">china</text>
-
-            <circle class="map-ripple" cx="1030" cy="294" r="20"></circle>
-            <circle class="map-dot" cx="1030" cy="294" r="6"></circle>
-            <text class="map-label" x="1048" y="290">japan</text>
-
-            <circle class="map-ripple" cx="582" cy="222" r="20"></circle>
-            <circle class="map-dot" cx="582" cy="222" r="6"></circle>
-            <text class="map-label" x="600" y="218">france</text>
-
-            <circle class="map-ripple" cx="612" cy="248" r="16"></circle>
-            <circle class="map-dot" cx="612" cy="248" r="5"></circle>
-            <text class="map-label" x="628" y="253">monaco</text>
-          </svg>
+          <button class="country-hotspot is-selected" style="left: 73.5%; top: 45%;" data-country="china" type="button">china</button>
+          <button class="country-hotspot" style="left: 84.5%; top: 46%;" data-country="japan" type="button">japan</button>
+          <button class="country-hotspot" style="left: 48.5%; top: 37%;" data-country="france" type="button">france</button>
+          <button class="country-hotspot" style="left: 50.8%; top: 40%;" data-country="monaco" type="button">monaco</button>
         </div>
 
         <aside class="country-preview" aria-live="polite">
           <div class="preview-top">
             <p class="preview-kicker">map preview</p>
             <h3 id="countryTitle">china</h3>
-            <p id="countryMeta">beijing and xi'an, 3 photographs</p>
+            <p id="countryMeta">beijing and xi'an</p>
           </div>
           <div class="preview-grid" id="previewGrid"></div>
         </aside>
@@ -839,7 +792,7 @@
   </main>
 
   <footer>
-    © 2026 whitmanz photography
+    © 2026 whitmanzhou photography
   </footer>
 
   <div class="lightbox" id="lightbox">
@@ -862,6 +815,7 @@
     const countryTitle = document.getElementById('countryTitle');
     const countryMeta = document.getElementById('countryMeta');
     const previewGrid = document.getElementById('previewGrid');
+    const heroStorageKey = 'whitmanzhou-last-preview';
 
     const photos = cards.map(card => {
       const img = card.querySelector('img');
@@ -873,7 +827,17 @@
       };
     });
 
+    function setHeroPhoto(src) {
+      document.documentElement.style.setProperty('--hero-photo', `url("${src}")`);
+      try {
+        localStorage.setItem(heroStorageKey, src);
+      } catch (error) {
+        // The page still works if browser storage is unavailable.
+      }
+    }
+
     function openLightbox(photo) {
+      setHeroPhoto(photo.src);
       lightboxImage.src = photo.src;
       lightboxImage.alt = photo.alt;
       lightboxCaption.textContent = photo.city;
@@ -937,15 +901,12 @@
 
     function formatPlaces(countryPhotos) {
       const cities = [...new Set(countryPhotos.map(photo => photo.city))];
-      const count = countryPhotos.length;
-      const names = cities.length > 1
+      return cities.length > 1
         ? `${cities.slice(0, -1).join(', ')} and ${cities.at(-1)}`
         : cities[0];
-
-      return `${names}, ${count} photograph${count === 1 ? '' : 's'}`;
     }
 
-    function showCountry(country) {
+    function showCountry(country, options = { updateHero: true }) {
       const countryPhotos = photos.filter(photo => photo.country === country);
 
       hotspots.forEach(hotspot => {
@@ -955,6 +916,10 @@
       countryTitle.textContent = country;
       countryMeta.textContent = formatPlaces(countryPhotos);
       previewGrid.innerHTML = '';
+
+      if (options.updateHero && countryPhotos[0]) {
+        setHeroPhoto(countryPhotos[0].src);
+      }
 
       countryPhotos.slice(0, 5).forEach(photo => {
         const button = document.createElement('button');
@@ -989,7 +954,16 @@
       }
     });
 
-    showCountry('china');
+    try {
+      const savedHeroPhoto = localStorage.getItem(heroStorageKey);
+      if (savedHeroPhoto) {
+        setHeroPhoto(savedHeroPhoto);
+      }
+    } catch (error) {
+      setHeroPhoto('images/monaco_2.jpeg');
+    }
+
+    showCountry('china', { updateHero: false });
   </script>
 </body>
 </html>
