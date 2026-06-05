@@ -35,7 +35,10 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       background:
+        radial-gradient(ellipse at 18% 18%, rgba(255, 255, 255, 0.72), transparent 26%),
+        radial-gradient(ellipse at 86% 78%, rgba(182, 190, 177, 0.18), transparent 30%),
         repeating-linear-gradient(90deg, rgba(142, 133, 120, 0.035) 0 1px, transparent 1px 64px),
+        repeating-linear-gradient(0deg, rgba(116, 96, 68, 0.025) 0 1px, transparent 1px 18px),
         linear-gradient(135deg, rgba(255, 255, 255, 0.93), rgba(238, 234, 226, 0.78) 32%, rgba(222, 229, 226, 0.62) 68%, rgba(247, 247, 245, 1)),
         #f7f7f5;
       color: var(--ink);
@@ -54,6 +57,7 @@
       place-items: center;
       background:
         repeating-linear-gradient(90deg, rgba(145, 128, 102, 0.055) 0 1px, transparent 1px 58px),
+        repeating-radial-gradient(circle at 50% 55%, rgba(255,255,255,0.16) 0 1px, transparent 2px 38px),
         radial-gradient(circle at 50% 46%, rgba(255,255,255,0.95), rgba(238,235,228,0.92) 54%, rgba(219,225,222,0.88));
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
@@ -156,7 +160,8 @@
       z-index: 1;
       background:
         repeating-linear-gradient(90deg, rgba(111, 91, 63, 0.08) 0 1px, transparent 1px 74px),
-        repeating-radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.13) 0 1px, transparent 2px 42px);
+        repeating-radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.13) 0 1px, transparent 2px 42px),
+        linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
       mix-blend-mode: soft-light;
       opacity: 0.7;
       pointer-events: none;
@@ -303,11 +308,10 @@
       background: linear-gradient(135deg, #dfe3e8, #f5f5f7);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       cursor: pointer;
-      transition: transform 0.24s ease, box-shadow 0.24s ease;
+      transition: box-shadow 0.24s ease;
     }
 
     .photo-card:hover {
-      transform: translateY(-6px);
       box-shadow: 0 18px 42px rgba(74, 68, 58, 0.16);
     }
 
@@ -316,11 +320,10 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      transition: transform 0.45s ease, filter 0.45s ease;
+      transition: filter 0.28s ease;
     }
 
     .photo-card:hover img {
-      transform: scale(1.025);
       filter: contrast(1.04) saturate(1.03);
     }
 
@@ -395,28 +398,16 @@
           rgba(154, 163, 159, 0.11) 1px,
           transparent 2px,
           transparent 36px
-        );
+      );
       opacity: 0.62;
-      animation: waterRings 7s ease-in-out infinite alternate;
     }
 
     .map-panel::after {
       background:
+        repeating-linear-gradient(105deg, rgba(132, 117, 92, 0.035) 0 1px, transparent 1px 70px),
         radial-gradient(circle at 72% 43%, rgba(255,255,255,0.42), transparent 18%),
         linear-gradient(120deg, transparent 28%, rgba(255,255,255,0.20), transparent 68%);
-      opacity: 0.7;
-    }
-
-    @keyframes waterRings {
-      from {
-        transform: scale(0.98);
-        opacity: 0.42;
-      }
-
-      to {
-        transform: scale(1.035);
-        opacity: 0.72;
-      }
+      opacity: 0.74;
     }
 
     .world-map {
@@ -556,11 +547,6 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .preview-thumb:hover img {
-      transform: scale(1.055);
     }
 
     .about-section {
@@ -757,87 +743,87 @@
           </button>
 
           <button class="photo-card" data-country="china" data-city="beijing">
-            <img loading="lazy" decoding="async" src="images/beijing_1.jpeg" alt="beijing photography">
+            <img loading="eager" decoding="async" src="images/beijing_1.jpeg" alt="beijing photography">
             <span class="photo-title">beijing</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="beijing">
-            <img loading="lazy" decoding="async" src="images/beijing_2.jpeg" alt="beijing photography">
+            <img loading="eager" decoding="async" src="images/beijing_2.jpeg" alt="beijing photography">
             <span class="photo-title">beijing</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kanazawa">
-            <img loading="lazy" decoding="async" src="images/kanazawa_1.jpeg" alt="kanazawa photography">
+            <img loading="eager" decoding="async" src="images/kanazawa_1.jpeg" alt="kanazawa photography">
             <span class="photo-title">kanazawa</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kanazawa">
-            <img loading="lazy" decoding="async" src="images/kanazawa_2.jpeg" alt="kanazawa photography">
+            <img loading="eager" decoding="async" src="images/kanazawa_2.jpeg" alt="kanazawa photography">
             <span class="photo-title">kanazawa</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="lazy" decoding="async" src="images/kyoto_1.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="images/kyoto_1.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="lazy" decoding="async" src="images/kyoto_2.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="images/kyoto_2.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="lazy" decoding="async" src="images/kyoto_3.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="images/kyoto_3.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="lazy" decoding="async" src="images/kyoto_4.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="images/kyoto_4.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="lazy" decoding="async" src="images/kyoto_5.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="images/kyoto_5.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="monaco" data-city="monaco">
-            <img loading="lazy" decoding="async" src="images/monaco_1.jpeg" alt="monaco photography">
+            <img loading="eager" decoding="async" src="images/monaco_1.jpeg" alt="monaco photography">
             <span class="photo-title">monaco</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="nagahama">
-            <img loading="lazy" decoding="async" src="images/nagahama_1.jpeg" alt="nagahama photography">
+            <img loading="eager" decoding="async" src="images/nagahama_1.jpeg" alt="nagahama photography">
             <span class="photo-title">nagahama</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img loading="lazy" decoding="async" src="images/paris_1.jpeg" alt="paris photography">
+            <img loading="eager" decoding="async" src="images/paris_1.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img loading="lazy" decoding="async" src="images/paris_2.jpeg" alt="paris photography">
+            <img loading="eager" decoding="async" src="images/paris_2.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img loading="lazy" decoding="async" src="images/paris_3.jpeg" alt="paris photography">
+            <img loading="eager" decoding="async" src="images/paris_3.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="shimonada">
-            <img loading="lazy" decoding="async" src="images/shimonada_1.jpeg" alt="shimonada photography">
+            <img loading="eager" decoding="async" src="images/shimonada_1.jpeg" alt="shimonada photography">
             <span class="photo-title">shimonada</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="takayama">
-            <img loading="lazy" decoding="async" src="images/takayama_1.jpeg" alt="takayama photography">
+            <img loading="eager" decoding="async" src="images/takayama_1.jpeg" alt="takayama photography">
             <span class="photo-title">takayama</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="xi'an">
-            <img loading="lazy" decoding="async" src="images/xian_1.jpeg" alt="xi'an photography">
+            <img loading="eager" decoding="async" src="images/xian_1.jpeg" alt="xi'an photography">
             <span class="photo-title">xi'an</span>
           </button>
         </div>
@@ -948,6 +934,14 @@
       }, 280);
     }
 
+    function preloadAllPhotos() {
+      photos.forEach(photo => {
+        const image = new Image();
+        image.decoding = 'async';
+        image.src = photo.src;
+      });
+    }
+
     cards.forEach(card => {
       card.addEventListener('click', () => {
         const img = card.querySelector('img');
@@ -987,7 +981,7 @@
         button.className = 'preview-thumb';
         button.type = 'button';
         button.setAttribute('aria-label', `open ${photo.city} photo`);
-        button.innerHTML = `<img loading="lazy" decoding="async" src="${photo.src}" alt="${photo.alt}">`;
+        button.innerHTML = `<img loading="eager" decoding="async" src="${photo.src}" alt="${photo.alt}">`;
         button.addEventListener('click', () => openLightbox(photo));
         previewGrid.appendChild(button);
       });
@@ -1021,6 +1015,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       const introLoader = document.getElementById('introLoader');
+      preloadAllPhotos();
       setTimeout(() => {
         introLoader?.classList.add('is-done');
       }, 1750);
