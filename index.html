@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preload" as="image" href="images/monaco_2.jpeg" fetchpriority="high">
+  <link rel="preload" as="image" href="thumbs/monaco_2.jpeg" fetchpriority="high">
   <title>whitmanzhou photography</title>
 
   <style>
@@ -12,18 +12,18 @@
     }
 
     :root {
-      --ink: #1d1d1f;
-      --muted: rgba(29, 29, 31, 0.62);
-      --line: rgba(29, 29, 31, 0.12);
-      --glass: rgba(255, 255, 255, 0.68);
-      --soft: #f7f7f5;
-      --accent: #8e8578;
-      --accent-cool: #a5abb0;
-      --platinum: #ece9e3;
-      --titanium: #b8b4ac;
-      --moss: #b8beb1;
-      --mist: #dfe3e2;
-      --hero-photo: url("images/monaco_2.jpeg");
+      --ink: #25231f;
+      --muted: rgba(37, 35, 31, 0.64);
+      --line: rgba(105, 82, 54, 0.22);
+      --glass: rgba(248, 246, 239, 0.72);
+      --sand: #f2efe5;
+      --sand-deep: #e2d8c5;
+      --wood: #8b6f4d;
+      --wood-dark: #4d3926;
+      --moss: #687562;
+      --moss-soft: #aeb8a6;
+      --paper: #fbfaf6;
+      --hero-photo: url("thumbs/monaco_2.jpeg");
     }
 
     html {
@@ -35,12 +35,12 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       background:
-        radial-gradient(ellipse at 18% 18%, rgba(255, 255, 255, 0.72), transparent 26%),
-        radial-gradient(ellipse at 86% 78%, rgba(182, 190, 177, 0.18), transparent 30%),
-        repeating-linear-gradient(90deg, rgba(142, 133, 120, 0.035) 0 1px, transparent 1px 64px),
-        repeating-linear-gradient(0deg, rgba(116, 96, 68, 0.025) 0 1px, transparent 1px 18px),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.93), rgba(238, 234, 226, 0.78) 32%, rgba(222, 229, 226, 0.62) 68%, rgba(247, 247, 245, 1)),
-        #f7f7f5;
+        radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.74), transparent 28%),
+        radial-gradient(ellipse at 86% 80%, rgba(104, 117, 98, 0.18), transparent 32%),
+        repeating-radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.20) 0 1px, transparent 2px 44px),
+        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.055) 0 1px, transparent 1px 72px),
+        repeating-linear-gradient(0deg, rgba(102, 76, 45, 0.030) 0 1px, transparent 1px 18px),
+        linear-gradient(135deg, #fbfaf6, #f1ecdf 40%, #dfe7dd 100%);
       color: var(--ink);
       overflow-x: hidden;
     }
@@ -56,9 +56,9 @@
       display: grid;
       place-items: center;
       background:
-        repeating-linear-gradient(90deg, rgba(145, 128, 102, 0.055) 0 1px, transparent 1px 58px),
-        repeating-radial-gradient(circle at 50% 55%, rgba(255,255,255,0.16) 0 1px, transparent 2px 38px),
-        radial-gradient(circle at 50% 46%, rgba(255,255,255,0.95), rgba(238,235,228,0.92) 54%, rgba(219,225,222,0.88));
+        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.07) 0 1px, transparent 1px 62px),
+        repeating-radial-gradient(circle at 50% 55%, rgba(255,255,255,0.18) 0 1px, transparent 2px 40px),
+        radial-gradient(circle at 50% 46%, rgba(251,250,246,0.97), rgba(242,239,229,0.94) 54%, rgba(218,228,215,0.90));
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
@@ -110,10 +110,10 @@
       gap: 6px;
       align-items: center;
       padding: 7px;
-      border: 1px solid rgba(94, 89, 81, 0.12);
+      border: 1px solid rgba(105, 82, 54, 0.24);
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(229, 226, 219, 0.72), rgba(218, 223, 222, 0.62));
-      box-shadow: 0 18px 50px rgba(73, 68, 60, 0.11);
+      background: linear-gradient(135deg, rgba(251, 250, 246, 0.86), rgba(226, 216, 197, 0.70), rgba(174, 184, 166, 0.58));
+      box-shadow: 0 18px 50px rgba(77, 57, 38, 0.14);
       transform: translateX(-50%);
       backdrop-filter: blur(22px) saturate(1.6);
       -webkit-backdrop-filter: blur(22px) saturate(1.6);
@@ -122,7 +122,7 @@
     nav a {
       padding: 8px 13px;
       border-radius: 999px;
-      color: rgba(29, 29, 31, 0.78);
+      color: rgba(77, 57, 38, 0.82);
       font-size: 13px;
       line-height: 1;
       text-decoration: none;
@@ -131,7 +131,7 @@
     }
 
     nav a:hover {
-      background: rgba(29, 29, 31, 0.08);
+      background: rgba(104, 117, 98, 0.14);
       color: var(--ink);
     }
 
@@ -148,8 +148,8 @@
       overflow: hidden;
       text-align: center;
       background:
-        linear-gradient(180deg, rgba(244,242,238,0.74), rgba(230,229,223,0.52) 46%, rgba(247,247,245,0.96)),
-        linear-gradient(rgba(65, 60, 53, 0.16), rgba(65, 60, 53, 0.16)),
+        linear-gradient(180deg, rgba(251,250,246,0.68), rgba(242,239,229,0.54) 44%, rgba(251,250,246,0.98)),
+        linear-gradient(rgba(77, 57, 38, 0.20), rgba(77, 57, 38, 0.20)),
         var(--hero-photo) center / cover no-repeat;
     }
 
@@ -159,7 +159,7 @@
       inset: 0;
       z-index: 1;
       background:
-        repeating-linear-gradient(90deg, rgba(111, 91, 63, 0.08) 0 1px, transparent 1px 74px),
+        repeating-linear-gradient(90deg, rgba(77, 57, 38, 0.12) 0 1px, transparent 1px 70px),
         repeating-radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.13) 0 1px, transparent 2px 42px),
         linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
       mix-blend-mode: soft-light;
@@ -185,7 +185,7 @@
 
     .eyebrow {
       margin: 0 0 18px;
-      color: rgba(29, 29, 31, 0.56);
+      color: rgba(77, 57, 38, 0.62);
       font-size: 15px;
       font-weight: 600;
     }
@@ -197,12 +197,13 @@
       letter-spacing: 0;
       line-height: 0.92;
       text-transform: lowercase;
+      color: rgba(37, 35, 31, 0.92);
     }
 
     .hero-text {
       max-width: 650px;
       margin: 28px auto 0;
-      color: rgba(29, 29, 31, 0.66);
+      color: rgba(77, 57, 38, 0.68);
       font-size: clamp(19px, 2.4vw, 28px);
       line-height: 1.28;
     }
@@ -246,12 +247,27 @@
 
     .section {
       padding: 86px max(24px, 6vw);
+      background:
+        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.035) 0 1px, transparent 1px 76px),
+        linear-gradient(180deg, rgba(251,250,246,0.68), rgba(242,239,229,0.52));
     }
 
     .section-head {
+      position: relative;
       max-width: 860px;
       margin: 0 auto 44px;
       text-align: center;
+    }
+
+    .section-head::before {
+      content: "";
+      display: block;
+      width: 46px;
+      height: 2px;
+      margin: 0 auto 22px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--moss), transparent);
+      opacity: 0.72;
     }
 
     .section h2,
@@ -262,6 +278,7 @@
       letter-spacing: 0;
       line-height: 0.96;
       text-transform: lowercase;
+      color: rgba(37, 35, 31, 0.88);
     }
 
     .section p,
@@ -283,6 +300,9 @@
       padding: 42px max(24px, 6vw) 60px;
       scroll-padding-inline: max(24px, 6vw);
       scrollbar-width: none;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.50), transparent 55%),
+        repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 0 1px, transparent 2px 38px);
     }
 
     .photo-stage::-webkit-scrollbar {
@@ -305,14 +325,15 @@
       border: 0;
       border-radius: 18px;
       overflow: hidden;
-      background: linear-gradient(135deg, #dfe3e8, #f5f5f7);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      background: linear-gradient(135deg, #e7dfcf, #fbfaf6);
+      box-shadow: 0 10px 30px rgba(77, 57, 38, 0.15);
+      outline: 1px solid rgba(105, 82, 54, 0.16);
       cursor: pointer;
       transition: box-shadow 0.24s ease;
     }
 
     .photo-card:hover {
-      box-shadow: 0 18px 42px rgba(74, 68, 58, 0.16);
+      box-shadow: 0 18px 42px rgba(77, 57, 38, 0.22);
     }
 
     .photo-card img {
@@ -335,7 +356,7 @@
       padding: 7px 9px;
       border-radius: 999px;
       color: white;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(77, 57, 38, 0.52);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       font-size: 12px;
@@ -356,7 +377,9 @@
     .map-section {
       min-height: 100svh;
       padding: 86px max(24px, 6vw) 56px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(242,242,239,0.92));
+      background:
+        repeating-radial-gradient(circle at 50% 46%, rgba(255,255,255,0.22) 0 1px, transparent 2px 42px),
+        linear-gradient(180deg, rgba(251,250,246,0.96), rgba(242,239,229,0.94));
       scroll-snap-align: start;
     }
 
@@ -366,9 +389,10 @@
     }
 
     .map-panel {
-      border: 1px solid rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(105, 82, 54, 0.24);
       border-radius: 28px;
       overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45), 0 28px 80px rgba(77, 57, 38, 0.13);
     }
 
     .map-panel {
@@ -377,8 +401,8 @@
       min-height: 500px;
       padding: 28px;
       background:
-        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.92), transparent 26%),
-        linear-gradient(135deg, #f8f7f4, #ebe8e2 45%, #e9eeec 78%, #f8f8f7);
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.94), transparent 26%),
+        linear-gradient(135deg, #fbfaf6, #eadfca 45%, #dce6d8 78%, #fbfaf6);
     }
 
     .map-panel::before,
@@ -394,8 +418,8 @@
       background:
         repeating-radial-gradient(
           circle at 66% 46%,
-          rgba(154, 163, 159, 0.16) 0,
-          rgba(154, 163, 159, 0.11) 1px,
+          rgba(255, 255, 255, 0.24) 0,
+          rgba(255, 255, 255, 0.16) 1px,
           transparent 2px,
           transparent 36px
       );
@@ -424,14 +448,14 @@
 
     .map-land {
       fill: rgba(255, 255, 255, 0.22);
-      stroke: rgba(112, 104, 91, 0.58);
+      stroke: rgba(77, 57, 38, 0.58);
       stroke-width: 2;
       vector-effect: non-scaling-stroke;
     }
 
     .map-mesh {
       fill: none;
-      stroke: rgba(112, 104, 91, 0.42);
+      stroke: rgba(77, 57, 38, 0.36);
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-width: 1.5;
@@ -439,8 +463,8 @@
     }
 
     .map-visited {
-      fill: rgba(143, 123, 93, 0.24);
-      stroke: rgba(121, 100, 71, 0.72);
+      fill: rgba(104, 117, 98, 0.24);
+      stroke: rgba(85, 99, 80, 0.78);
       stroke-width: 1.6;
       vector-effect: non-scaling-stroke;
     }
@@ -452,9 +476,9 @@
       gap: 7px;
       border: 0;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.62);
-      color: rgba(75, 68, 58, 0.82);
-      box-shadow: 0 12px 28px rgba(75, 68, 58, 0.12);
+      background: rgba(251, 250, 246, 0.72);
+      color: rgba(77, 57, 38, 0.88);
+      box-shadow: 0 12px 28px rgba(77, 57, 38, 0.14);
       cursor: pointer;
       font: inherit;
       font-size: 13px;
@@ -474,25 +498,25 @@
       height: 9px;
       border-radius: 999px;
       background: currentColor;
-      box-shadow: 0 0 0 5px rgba(143, 123, 93, 0.14);
+      box-shadow: 0 0 0 5px rgba(104, 117, 98, 0.16);
     }
 
     .country-hotspot:hover,
     .country-hotspot:focus {
       background: rgba(255, 255, 255, 0.94);
-      color: var(--accent);
+      color: var(--moss);
       outline: none;
       transform: translate(-50%, -50%) scale(1.06);
       box-shadow: 0 18px 38px rgba(75, 68, 58, 0.16);
     }
 
     .country-hotspot.is-selected {
-      background: linear-gradient(135deg, #a28b68, #7f715f);
+      background: linear-gradient(135deg, #74816b, #4d3926);
       color: #fff;
     }
 
     .country-hotspot.is-selected::before {
-      box-shadow: 0 0 0 6px rgba(143, 123, 93, 0.18);
+      box-shadow: 0 0 0 6px rgba(104, 117, 98, 0.20);
     }
 
     .preview-grid {
@@ -532,7 +556,8 @@
       border-radius: 10px;
       overflow: hidden;
       background: transparent;
-      box-shadow: 0 14px 30px rgba(55, 48, 38, 0.24);
+      box-shadow: 0 14px 30px rgba(77, 57, 38, 0.26);
+      outline: 1px solid rgba(251,250,246,0.65);
       cursor: pointer;
       padding: 0;
     }
@@ -554,13 +579,15 @@
       place-items: center;
       min-height: 72svh;
       text-align: center;
-      background: #f5f5f7;
+      background:
+        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.045) 0 1px, transparent 1px 70px),
+        linear-gradient(180deg, #f8f4ea, #eef3ec);
       scroll-snap-align: start;
     }
 
     footer {
       padding: 34px 24px;
-      color: rgba(29, 29, 31, 0.48);
+      color: rgba(77, 57, 38, 0.54);
       font-size: 13px;
       text-align: center;
     }
@@ -572,7 +599,7 @@
       display: grid;
       place-items: center;
       padding: 28px;
-      background: rgba(245, 245, 247, 0.72);
+      background: rgba(242, 239, 229, 0.78);
       backdrop-filter: blur(34px) saturate(1.4);
       -webkit-backdrop-filter: blur(34px) saturate(1.4);
       opacity: 0;
@@ -613,7 +640,7 @@
 
     .lightbox-caption {
       margin-top: 14px;
-      color: rgba(29, 29, 31, 0.72);
+      color: rgba(77, 57, 38, 0.72);
       font-size: 15px;
       text-align: center;
       text-transform: lowercase;
@@ -627,7 +654,7 @@
       height: 42px;
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.76);
+      background: rgba(251, 250, 246, 0.80);
       color: var(--ink);
       cursor: pointer;
       font-size: 24px;
@@ -738,92 +765,92 @@
       <div class="photo-stage" aria-label="horizontal photography gallery">
         <div class="gallery">
           <button class="photo-card" data-country="monaco" data-city="monaco">
-            <img loading="eager" decoding="async" fetchpriority="high" src="images/monaco_2.jpeg" alt="monaco photography">
+            <img loading="eager" decoding="async" fetchpriority="high" src="thumbs/monaco_2.jpeg" data-full="images/monaco_2.jpeg" alt="monaco photography">
             <span class="photo-title">monaco</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="beijing">
-            <img loading="eager" decoding="async" src="images/beijing_1.jpeg" alt="beijing photography">
+            <img loading="eager" decoding="async" src="thumbs/beijing_1.jpeg" data-full="images/beijing_1.jpeg" alt="beijing photography">
             <span class="photo-title">beijing</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="beijing">
-            <img loading="eager" decoding="async" src="images/beijing_2.jpeg" alt="beijing photography">
+            <img loading="eager" decoding="async" src="thumbs/beijing_2.jpeg" data-full="images/beijing_2.jpeg" alt="beijing photography">
             <span class="photo-title">beijing</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kanazawa">
-            <img loading="eager" decoding="async" src="images/kanazawa_1.jpeg" alt="kanazawa photography">
+            <img loading="eager" decoding="async" src="thumbs/kanazawa_1.jpeg" data-full="images/kanazawa_1.jpeg" alt="kanazawa photography">
             <span class="photo-title">kanazawa</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kanazawa">
-            <img loading="eager" decoding="async" src="images/kanazawa_2.jpeg" alt="kanazawa photography">
+            <img loading="eager" decoding="async" src="thumbs/kanazawa_2.jpeg" data-full="images/kanazawa_2.jpeg" alt="kanazawa photography">
             <span class="photo-title">kanazawa</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="eager" decoding="async" src="images/kyoto_1.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="thumbs/kyoto_1.jpeg" data-full="images/kyoto_1.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="eager" decoding="async" src="images/kyoto_2.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="thumbs/kyoto_2.jpeg" data-full="images/kyoto_2.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="eager" decoding="async" src="images/kyoto_3.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="thumbs/kyoto_3.jpeg" data-full="images/kyoto_3.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="eager" decoding="async" src="images/kyoto_4.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="thumbs/kyoto_4.jpeg" data-full="images/kyoto_4.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="kyoto">
-            <img loading="eager" decoding="async" src="images/kyoto_5.jpeg" alt="kyoto photography">
+            <img loading="eager" decoding="async" src="thumbs/kyoto_5.jpeg" data-full="images/kyoto_5.jpeg" alt="kyoto photography">
             <span class="photo-title">kyoto</span>
           </button>
 
           <button class="photo-card" data-country="monaco" data-city="monaco">
-            <img loading="eager" decoding="async" src="images/monaco_1.jpeg" alt="monaco photography">
+            <img loading="eager" decoding="async" src="thumbs/monaco_1.jpeg" data-full="images/monaco_1.jpeg" alt="monaco photography">
             <span class="photo-title">monaco</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="nagahama">
-            <img loading="eager" decoding="async" src="images/nagahama_1.jpeg" alt="nagahama photography">
+            <img loading="eager" decoding="async" src="thumbs/nagahama_1.jpeg" data-full="images/nagahama_1.jpeg" alt="nagahama photography">
             <span class="photo-title">nagahama</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img loading="eager" decoding="async" src="images/paris_1.jpeg" alt="paris photography">
+            <img loading="eager" decoding="async" src="thumbs/paris_1.jpeg" data-full="images/paris_1.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img loading="eager" decoding="async" src="images/paris_2.jpeg" alt="paris photography">
+            <img loading="eager" decoding="async" src="thumbs/paris_2.jpeg" data-full="images/paris_2.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="france" data-city="paris">
-            <img loading="eager" decoding="async" src="images/paris_3.jpeg" alt="paris photography">
+            <img loading="eager" decoding="async" src="thumbs/paris_3.jpeg" data-full="images/paris_3.jpeg" alt="paris photography">
             <span class="photo-title">paris</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="shimonada">
-            <img loading="eager" decoding="async" src="images/shimonada_1.jpeg" alt="shimonada photography">
+            <img loading="eager" decoding="async" src="thumbs/shimonada_1.jpeg" data-full="images/shimonada_1.jpeg" alt="shimonada photography">
             <span class="photo-title">shimonada</span>
           </button>
 
           <button class="photo-card" data-country="japan" data-city="takayama">
-            <img loading="eager" decoding="async" src="images/takayama_1.jpeg" alt="takayama photography">
+            <img loading="eager" decoding="async" src="thumbs/takayama_1.jpeg" data-full="images/takayama_1.jpeg" alt="takayama photography">
             <span class="photo-title">takayama</span>
           </button>
 
           <button class="photo-card" data-country="china" data-city="xi'an">
-            <img loading="eager" decoding="async" src="images/xian_1.jpeg" alt="xi'an photography">
+            <img loading="eager" decoding="async" src="thumbs/xian_1.jpeg" data-full="images/xian_1.jpeg" alt="xi'an photography">
             <span class="photo-title">xi'an</span>
           </button>
         </div>
@@ -909,9 +936,18 @@
       return {
         country: card.dataset.country,
         city: card.dataset.city,
-        src: img.getAttribute('src'),
+        thumb: img.getAttribute('src'),
+        full: img.getAttribute('data-full') || img.getAttribute('src'),
         alt: img.getAttribute('alt')
       };
+    });
+
+    document.querySelectorAll('img[data-full]').forEach(img => {
+      img.addEventListener('error', () => {
+        if (img.src.includes('/thumbs/')) {
+          img.src = img.getAttribute('data-full');
+        }
+      }, { once: true });
     });
 
     function setHeroPhoto(src) {
@@ -919,7 +955,7 @@
     }
 
     function openLightbox(photo) {
-      lightboxImage.src = photo.src;
+      lightboxImage.src = photo.full;
       lightboxImage.alt = photo.alt;
       lightboxCaption.textContent = photo.city;
       lightbox.classList.add('active');
@@ -938,7 +974,7 @@
       photos.forEach(photo => {
         const image = new Image();
         image.decoding = 'async';
-        image.src = photo.src;
+        image.src = photo.thumb;
       });
     }
 
@@ -946,7 +982,8 @@
       card.addEventListener('click', () => {
         const img = card.querySelector('img');
         openLightbox({
-          src: img.getAttribute('src'),
+          thumb: img.getAttribute('src'),
+          full: img.getAttribute('data-full') || img.getAttribute('src'),
           alt: img.getAttribute('alt'),
           city: card.dataset.city
         });
@@ -973,7 +1010,7 @@
       previewGrid.classList.remove('is-visible');
 
       if (countryPhotos[0]) {
-        setHeroPhoto(countryPhotos[0].src);
+        setHeroPhoto(countryPhotos[0].thumb);
       }
 
       countryPhotos.forEach(photo => {
@@ -981,7 +1018,7 @@
         button.className = 'preview-thumb';
         button.type = 'button';
         button.setAttribute('aria-label', `open ${photo.city} photo`);
-        button.innerHTML = `<img loading="eager" decoding="async" src="${photo.src}" alt="${photo.alt}">`;
+        button.innerHTML = `<img loading="eager" decoding="async" src="${photo.thumb}" alt="${photo.alt}">`;
         button.addEventListener('click', () => openLightbox(photo));
         previewGrid.appendChild(button);
       });
