@@ -10,418 +10,389 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --ink: #1d1d1f;
+      --muted: rgba(29, 29, 31, 0.62);
+      --line: rgba(29, 29, 31, 0.12);
+      --glass: rgba(255, 255, 255, 0.68);
+      --soft: #f5f5f7;
+      --accent: #0071e3;
+    }
+
     html {
       scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
     }
 
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.95), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(220, 230, 245, 0.45), transparent 30%),
-        linear-gradient(135deg, #f8f4ee 0%, #eee6dc 48%, #f7f3ee 100%);
-      color: #1d1d1f;
+      background: #f5f5f7;
+      color: var(--ink);
       overflow-x: hidden;
+    }
+
+    body.preview-open {
+      overflow: hidden;
     }
 
     nav {
       position: fixed;
-      top: 24px;
-      right: 32px;
+      top: 18px;
+      left: 50%;
       z-index: 1000;
-      padding: 12px 18px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding: 7px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.58);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      font-size: 14px;
-      letter-spacing: -0.01em;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+      transform: translateX(-50%);
+      backdrop-filter: blur(22px) saturate(1.6);
+      -webkit-backdrop-filter: blur(22px) saturate(1.6);
     }
 
     nav a {
-      margin-left: 18px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: rgba(29, 29, 31, 0.78);
+      font-size: 13px;
+      line-height: 1;
       text-decoration: none;
-      color: #1d1d1f;
-      opacity: 0.82;
-      transition: opacity 0.25s ease;
-    }
-
-    nav a:first-child {
-      margin-left: 0;
+      transition: background 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
     }
 
     nav a:hover {
-      opacity: 1;
+      background: rgba(29, 29, 31, 0.08);
+      color: var(--ink);
+    }
+
+    .snap {
+      min-height: 100svh;
+      scroll-snap-align: start;
     }
 
     header {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px;
       position: relative;
+      display: grid;
+      place-items: center;
+      padding: 86px 24px 34px;
+      overflow: hidden;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(245,245,247,0.68) 55%, rgba(245,245,247,1)),
+        url("images/kyoto_1.jpeg") center / cover no-repeat;
     }
 
-    header::before {
+    header::after {
       content: "";
       position: absolute;
-      width: 540px;
-      height: 540px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.75), rgba(255,255,255,0));
-      filter: blur(12px);
-      animation: floatGlow 8s ease-in-out infinite alternate;
-      z-index: -1;
+      inset: 0;
+      background: rgba(245, 245, 247, 0.34);
+      pointer-events: none;
     }
 
-    @keyframes floatGlow {
-      from {
-        transform: translate(-40px, -20px) scale(1);
-      }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(980px, 100%);
+      padding-top: 7vh;
+    }
 
-      to {
-        transform: translate(40px, 30px) scale(1.12);
-      }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: rgba(29, 29, 31, 0.56);
+      font-size: 15px;
+      font-weight: 600;
     }
 
     h1 {
-      font-size: clamp(52px, 8vw, 96px);
-      font-weight: 500;
-      margin: 0 0 18px;
-      letter-spacing: -0.06em;
-      line-height: 0.95;
+      margin: 0;
+      font-size: clamp(58px, 11vw, 132px);
+      font-weight: 650;
+      letter-spacing: 0;
+      line-height: 0.92;
       text-transform: lowercase;
     }
 
     .hero-text {
-      font-size: 20px;
-      line-height: 1.55;
-      max-width: 640px;
-      margin: 0 auto;
-      color: rgba(29, 29, 31, 0.62);
-      letter-spacing: -0.02em;
+      max-width: 650px;
+      margin: 28px auto 0;
+      color: rgba(29, 29, 31, 0.66);
+      font-size: clamp(19px, 2.4vw, 28px);
+      line-height: 1.28;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      z-index: 3;
+      width: 24px;
+      height: 40px;
+      border: 1px solid rgba(29, 29, 31, 0.24);
+      border-radius: 999px;
+      transform: translateX(-50%);
+    }
+
+    .scroll-cue::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      width: 4px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(29, 29, 31, 0.55);
+      transform: translateX(-50%);
+      animation: cue 1.7s ease-in-out infinite;
+    }
+
+    @keyframes cue {
+      0%, 100% {
+        transform: translate(-50%, 0);
+        opacity: 0.25;
+      }
+
+      45% {
+        transform: translate(-50%, 13px);
+        opacity: 0.9;
+      }
     }
 
     .section {
-      padding: 90px 8%;
+      padding: 86px max(24px, 6vw);
+    }
+
+    .section-head {
+      max-width: 860px;
+      margin: 0 auto 44px;
+      text-align: center;
     }
 
     .section h2,
     .map-section h2 {
-      font-size: clamp(38px, 5vw, 64px);
-      font-weight: 600;
-      margin: 0 0 30px;
-      letter-spacing: -0.065em;
+      margin: 0;
+      font-size: clamp(40px, 6vw, 74px);
+      font-weight: 650;
+      letter-spacing: 0;
+      line-height: 0.96;
       text-transform: lowercase;
     }
 
     .section p,
     .map-intro {
-      font-size: 18px;
-      line-height: 1.7;
-      max-width: 680px;
-      color: rgba(29, 29, 31, 0.62);
-      letter-spacing: -0.015em;
+      max-width: 650px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.48;
     }
 
-    /* selected works */
+    .photo-stage {
+      display: flex;
+      align-items: center;
+      min-height: 58vh;
+      margin-inline: calc(max(24px, 6vw) * -1);
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 42px max(24px, 6vw) 60px;
+      scroll-padding-inline: max(24px, 6vw);
+      scrollbar-width: none;
+    }
+
+    .photo-stage::-webkit-scrollbar {
+      display: none;
+    }
 
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 26px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: max-content;
+      margin: 0 auto;
+      perspective: 900px;
     }
 
     .photo-card {
       position: relative;
-      height: 380px;
-      border-radius: 28px;
+      flex: 0 0 auto;
+      width: clamp(94px, 10vw, 148px);
+      height: clamp(164px, 27vw, 300px);
+      border: 0;
+      border-radius: 18px;
       overflow: hidden;
-      background: #d8cec2;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.10);
-      transform: translateZ(0);
+      background: linear-gradient(135deg, #dfe3e8, #f5f5f7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       cursor: pointer;
+      transform: translateZ(0) scale(var(--scale, 1));
+      transform-origin: center bottom;
+      transition:
+        transform 0.18s ease,
+        width 0.18s ease,
+        box-shadow 0.18s ease,
+        border-radius 0.18s ease;
+      will-change: transform, width;
+    }
+
+    .photo-card.is-near {
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.18);
+    }
+
+    .photo-card.is-active {
+      z-index: 5;
+      width: clamp(150px, 18vw, 260px);
+      border-radius: 22px;
+      box-shadow: 0 34px 80px rgba(0, 0, 0, 0.22);
     }
 
     .photo-card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
-      transition:
-        transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
-        filter 0.9s ease;
+      object-fit: cover;
+      transition: transform 0.45s ease, filter 0.45s ease;
     }
 
-    .photo-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.45), transparent 22%),
-        radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.25), transparent 24%),
-        linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.38), transparent 70%);
-      opacity: 0;
-      transform: translateX(-20%) rotate(8deg);
-      transition: opacity 0.6s ease;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .photo-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-radial-gradient(
-          circle at var(--x, 50%) var(--y, 50%),
-          rgba(255, 255, 255, 0.20) 0px,
-          rgba(255, 255, 255, 0.08) 6px,
-          transparent 14px,
-          transparent 28px
-        );
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 0.5s ease, transform 0.8s ease;
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .photo-card:hover img {
-      transform: scale(1.08);
+    .photo-card:hover img,
+    .photo-card.is-active img {
+      transform: scale(1.045);
       filter: contrast(1.04) saturate(1.03);
-    }
-
-    .photo-card:hover::before {
-      opacity: 1;
-      animation: liquidLight 2.8s ease-in-out infinite alternate;
-    }
-
-    .photo-card:hover::after {
-      opacity: 1;
-      transform: scale(1.25);
-      animation: rippleMove 1.8s ease-out infinite;
-    }
-
-    @keyframes liquidLight {
-      from {
-        transform: translateX(-22%) rotate(8deg);
-      }
-
-      to {
-        transform: translateX(18%) rotate(12deg);
-      }
-    }
-
-    @keyframes rippleMove {
-      from {
-        filter: blur(0px);
-        transform: scale(0.9);
-      }
-
-      to {
-        filter: blur(1.5px);
-        transform: scale(1.28);
-      }
     }
 
     .photo-title {
       position: absolute;
-      left: 22px;
-      bottom: 20px;
-      z-index: 4;
-      font-size: 13px;
-      font-weight: 650;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 7px 9px;
+      border-radius: 999px;
       color: white;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1;
+      text-align: center;
       opacity: 0;
-      transform: translateY(10px);
-      transition: 0.5s ease;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+      transform: translateY(8px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      text-transform: lowercase;
     }
 
-    .photo-card:hover .photo-title {
+    .photo-card:hover .photo-title,
+    .photo-card.is-active .photo-title {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* smooth photo preview */
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 3000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
-      background: rgba(10, 10, 12, 0.58);
-      backdrop-filter: blur(26px);
-      -webkit-backdrop-filter: blur(26px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.42s ease;
-    }
-
-    .lightbox.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .lightbox-content {
-      position: relative;
-      max-width: min(92vw, 1180px);
-      max-height: 86vh;
-      transform: scale(0.94) translateY(18px);
-      opacity: 0;
-      transition:
-        transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
-        opacity 0.45s ease;
-    }
-
-    .lightbox.active .lightbox-content {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-
-    .lightbox img {
-      display: block;
-      max-width: 100%;
-      max-height: 82vh;
-      border-radius: 30px;
-      object-fit: contain;
-      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
-    }
-
-    .lightbox-caption {
-      margin-top: 16px;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 15px;
-      letter-spacing: -0.01em;
-      text-transform: lowercase;
-    }
-
-    .lightbox-close {
-      position: fixed;
-      top: 28px;
-      right: 32px;
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.18);
-      color: white;
-      font-size: 24px;
-      line-height: 1;
-      cursor: pointer;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      transition: transform 0.25s ease, background 0.25s ease;
-    }
-
-    .lightbox-close:hover {
-      transform: scale(1.08);
-      background: rgba(255,255,255,0.28);
-    }
-
-    /* black world map */
-
     .map-section {
-      padding: 90px 8% 60px;
+      min-height: 100svh;
+      padding: 86px max(24px, 6vw) 56px;
+      background: #fff;
+      scroll-snap-align: start;
     }
 
-    .map-intro {
-      margin: -10px 0 42px 0;
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.55fr);
+      gap: 28px;
+      align-items: stretch;
+      max-width: 1220px;
+      margin: 42px auto 0;
+    }
+
+    .map-panel,
+    .country-preview {
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 28px;
+      background: #f5f5f7;
+      overflow: hidden;
     }
 
     .map-panel {
       position: relative;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 36px;
-      border-radius: 40px;
+      display: grid;
+      place-items: center;
+      min-height: 520px;
+      padding: 28px;
       background:
-        radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.18), transparent 25%),
-        radial-gradient(circle at 82% 68%, rgba(211, 177, 111, 0.18), transparent 22%),
-        linear-gradient(145deg, #050505 0%, #111113 45%, #050505 100%);
-      box-shadow:
-        0 38px 100px rgba(0, 0, 0, 0.28),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-
-    .map-panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, transparent 25%, rgba(255,255,255,0.06), transparent 62%);
-      opacity: 0.8;
-      pointer-events: none;
+        linear-gradient(rgba(255, 255, 255, 0.34) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.34) 1px, transparent 1px),
+        #f5f5f7;
+      background-size: 72px 72px;
     }
 
     .black-map {
-      position: relative;
-      z-index: 2;
       width: 100%;
       height: auto;
       display: block;
     }
 
     .land {
-      fill: #171717;
-      stroke: rgba(255, 255, 255, 0.72);
-      stroke-width: 1.2;
+      fill: #e4e7eb;
+      stroke: rgba(29, 29, 31, 0.18);
+      stroke-width: 1;
       vector-effect: non-scaling-stroke;
     }
 
     .country-line {
       fill: none;
-      stroke: rgba(255, 255, 255, 0.35);
-      stroke-width: 0.85;
+      stroke: rgba(29, 29, 31, 0.13);
+      stroke-width: 0.75;
       vector-effect: non-scaling-stroke;
     }
 
     .visited {
-      fill: #d6b16a;
-      stroke: rgba(255, 255, 255, 0.92);
+      fill: #222226;
+      stroke: rgba(255, 255, 255, 0.88);
       stroke-width: 1.1;
-      filter:
-        drop-shadow(0 0 10px rgba(214, 177, 106, 0.62))
-        drop-shadow(0 0 22px rgba(214, 177, 106, 0.36));
-      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), fill 0.35s ease;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.16));
       transform-box: fill-box;
       transform-origin: center;
       cursor: pointer;
+      transition: transform 0.24s ease, fill 0.24s ease;
     }
 
-    .visited:hover {
-      fill: #f3d99c;
-      transform: scale(1.08);
+    .country-hotspot {
+      cursor: pointer;
+    }
+
+    .hit-zone {
+      fill: transparent;
+      pointer-events: all;
+    }
+
+    .country-hotspot:hover .visited,
+    .country-hotspot:focus .visited {
+      fill: var(--accent);
+      transform: scale(1.06);
+    }
+
+    .country-hotspot.is-selected .visited {
+      fill: var(--accent);
     }
 
     .map-dot {
-      fill: #fff5da;
-      stroke: #ffffff;
+      fill: #ffffff;
+      stroke: #0071e3;
       stroke-width: 2;
-      filter: drop-shadow(0 0 14px rgba(255, 236, 190, 0.9));
+      filter: drop-shadow(0 0 10px rgba(0, 113, 227, 0.42));
+      pointer-events: none;
     }
 
     .map-ripple {
       fill: none;
-      stroke: rgba(243, 217, 156, 0.82);
+      stroke: rgba(0, 113, 227, 0.4);
       stroke-width: 2;
       opacity: 0;
       animation: countryRipple 2.2s ease-out infinite;
       transform-origin: center;
+      pointer-events: none;
     }
 
     @keyframes countryRipple {
@@ -430,294 +401,442 @@
         transform: scale(0.4);
       }
 
-      75% {
+      80%, 100% {
         opacity: 0;
-        transform: scale(1.8);
-      }
-
-      100% {
-        opacity: 0;
-        transform: scale(2.2);
+        transform: scale(1.9);
       }
     }
 
     .map-label {
-      fill: rgba(255, 255, 255, 0.76);
+      fill: rgba(29, 29, 31, 0.68);
       font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
+      font-weight: 650;
       pointer-events: none;
       text-transform: lowercase;
     }
 
-    .map-note {
-      margin-top: 22px;
-      color: rgba(255, 255, 255, 0.48);
-      font-size: 14px;
-      letter-spacing: -0.01em;
-      text-align: center;
+    .country-preview {
+      display: flex;
+      flex-direction: column;
+      min-height: 520px;
+      padding: 18px;
+    }
+
+    .preview-top {
+      padding: 6px 6px 18px;
+    }
+
+    .preview-kicker {
+      margin: 0 0 8px;
+      color: rgba(29, 29, 31, 0.5);
+      font-size: 13px;
+      font-weight: 650;
+      text-transform: lowercase;
+    }
+
+    .country-preview h3 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 650;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: lowercase;
+    }
+
+    .country-preview p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.42;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: auto;
+    }
+
+    .preview-thumb {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #dedede;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .preview-thumb:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16 / 10;
+    }
+
+    .preview-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .preview-thumb:hover img {
+      transform: scale(1.055);
     }
 
     .about-section {
+      display: grid;
+      place-items: center;
+      min-height: 72svh;
       text-align: center;
-    }
-
-    .about-section p {
-      margin: 0 auto;
+      background: #f5f5f7;
+      scroll-snap-align: start;
     }
 
     footer {
-      padding: 50px;
-      text-align: center;
-      font-size: 14px;
+      padding: 34px 24px;
       color: rgba(29, 29, 31, 0.48);
-      letter-spacing: -0.01em;
+      font-size: 13px;
+      text-align: center;
     }
 
-    @media (max-width: 700px) {
-      nav {
-        top: 18px;
-        right: 18px;
-        left: 18px;
-        text-align: center;
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: rgba(245, 245, 247, 0.72);
+      backdrop-filter: blur(34px) saturate(1.4);
+      -webkit-backdrop-filter: blur(34px) saturate(1.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      width: min(1100px, 100%);
+      transform: translateY(18px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.36s ease, opacity 0.28s ease;
+    }
+
+    .lightbox.active .lightbox-content {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .lightbox img {
+      display: block;
+      width: 100%;
+      max-height: 82svh;
+      border-radius: 24px;
+      object-fit: contain;
+      background: #e8e8ed;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.22);
+    }
+
+    .lightbox-caption {
+      margin-top: 14px;
+      color: rgba(29, 29, 31, 0.72);
+      font-size: 15px;
+      text-align: center;
+      text-transform: lowercase;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      transform: scale(1.06);
+      background: #fff;
+    }
+
+    @media (max-width: 860px) {
+      html {
+        scroll-snap-type: none;
       }
 
-      nav a {
-        margin-left: 14px;
+      nav {
+        max-width: calc(100vw - 24px);
+        overflow-x: auto;
       }
 
       header {
-        padding: 32px 24px;
+        min-height: 100svh;
       }
 
-      .hero-text {
-        font-size: 18px;
+      .section {
+        padding-block: 72px;
       }
 
-      .section,
-      .map-section {
-        padding-left: 6%;
-        padding-right: 6%;
+      .photo-stage {
+        align-items: flex-start;
+        min-height: auto;
+        padding-top: 24px;
       }
 
-      .photo-card {
-        height: 300px;
+      .photo-card,
+      .photo-card.is-active {
+        width: 118px;
+        height: 210px;
+        transform: none;
       }
 
-      .map-panel {
-        padding: 18px;
-        border-radius: 28px;
+      .photo-title {
+        opacity: 1;
+        transform: none;
       }
 
-      .lightbox {
-        padding: 18px;
+      .map-layout {
+        grid-template-columns: 1fr;
       }
 
-      .lightbox img {
+      .map-panel,
+      .country-preview {
+        min-height: auto;
         border-radius: 22px;
       }
 
-      .lightbox-close {
-        top: 18px;
-        right: 18px;
+      .map-panel {
+        padding: 14px;
+      }
+
+      .preview-grid {
+        margin-top: 26px;
       }
     }
   </style>
 </head>
 
 <body>
-
-  <nav>
-    <a href="#portfolio">portfolio</a>
+  <nav aria-label="main navigation">
+    <a href="#portfolio">photos</a>
     <a href="#map">map</a>
     <a href="#about">about</a>
     <a href="mailto:your-email@example.com">contact</a>
   </nav>
 
-  <header>
-    <div>
+  <header class="snap">
+    <div class="hero-inner">
+      <p class="eyebrow">photography portfolio</p>
       <h1>whitmanz</h1>
-      <p class="hero-text">
-        photography portfolio of quiet moments, natural light, and visual stories.
-      </p>
+      <p class="hero-text">quiet travel frames, natural light, and places remembered in small details.</p>
     </div>
+    <a class="scroll-cue" href="#portfolio" aria-label="scroll to photos"></a>
   </header>
 
-  <section class="section" id="portfolio">
-    <h2>selected works</h2>
-
-    <div class="gallery">
-
-      <div class="photo-card">
-        <img src="images/monaco_2.jpeg" alt="monaco photography">
-        <div class="photo-title">monaco</div>
+  <main>
+    <section class="section snap" id="portfolio">
+      <div class="section-head">
+        <h2>selected works</h2>
+        <p>a single row of moments. move across the photographs and let the strip open around your cursor.</p>
       </div>
 
-      <div class="photo-card">
-        <img src="images/beijing_1.jpeg" alt="beijing photography">
-        <div class="photo-title">beijing</div>
+      <div class="photo-stage" aria-label="horizontal photography gallery">
+        <div class="gallery">
+          <button class="photo-card" data-country="monaco" data-city="monaco">
+            <img src="images/monaco_2.jpeg" alt="monaco photography">
+            <span class="photo-title">monaco</span>
+          </button>
+
+          <button class="photo-card" data-country="china" data-city="beijing">
+            <img src="images/beijing_1.jpeg" alt="beijing photography">
+            <span class="photo-title">beijing</span>
+          </button>
+
+          <button class="photo-card" data-country="china" data-city="beijing">
+            <img src="images/beijing_2.jpeg" alt="beijing photography">
+            <span class="photo-title">beijing</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kanazawa">
+            <img src="images/kanazawa_1.jpeg" alt="kanazawa photography">
+            <span class="photo-title">kanazawa</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kanazawa">
+            <img src="images/kanazawa_2.jpeg" alt="kanazawa photography">
+            <span class="photo-title">kanazawa</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kyoto">
+            <img src="images/kyoto_1.jpeg" alt="kyoto photography">
+            <span class="photo-title">kyoto</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kyoto">
+            <img src="images/kyoto_2.jpeg" alt="kyoto photography">
+            <span class="photo-title">kyoto</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kyoto">
+            <img src="images/kyoto_3.jpeg" alt="kyoto photography">
+            <span class="photo-title">kyoto</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kyoto">
+            <img src="images/kyoto_4.jpeg" alt="kyoto photography">
+            <span class="photo-title">kyoto</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="kyoto">
+            <img src="images/kyoto_5.jpeg" alt="kyoto photography">
+            <span class="photo-title">kyoto</span>
+          </button>
+
+          <button class="photo-card" data-country="monaco" data-city="monaco">
+            <img src="images/monaco_1.jpeg" alt="monaco photography">
+            <span class="photo-title">monaco</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="nagahama">
+            <img src="images/nagahama_1.jpeg" alt="nagahama photography">
+            <span class="photo-title">nagahama</span>
+          </button>
+
+          <button class="photo-card" data-country="france" data-city="paris">
+            <img src="images/paris_1.jpeg" alt="paris photography">
+            <span class="photo-title">paris</span>
+          </button>
+
+          <button class="photo-card" data-country="france" data-city="paris">
+            <img src="images/paris_2.jpeg" alt="paris photography">
+            <span class="photo-title">paris</span>
+          </button>
+
+          <button class="photo-card" data-country="france" data-city="paris">
+            <img src="images/paris_3.jpeg" alt="paris photography">
+            <span class="photo-title">paris</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="shimonada">
+            <img src="images/shimonada_1.jpeg" alt="shimonada photography">
+            <span class="photo-title">shimonada</span>
+          </button>
+
+          <button class="photo-card" data-country="japan" data-city="takayama">
+            <img src="images/takayama_1.jpeg" alt="takayama photography">
+            <span class="photo-title">takayama</span>
+          </button>
+
+          <button class="photo-card" data-country="china" data-city="xi'an">
+            <img src="images/xian_1.jpeg" alt="xi'an photography">
+            <span class="photo-title">xi'an</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section" id="map">
+      <div class="section-head">
+        <h2>places captured</h2>
+        <p class="map-intro">click a highlighted country to preview the photographs connected to that place.</p>
       </div>
 
-      <div class="photo-card">
-        <img src="images/beijing_2.jpeg" alt="beijing photography">
-        <div class="photo-title">beijing</div>
+      <div class="map-layout">
+        <div class="map-panel">
+          <svg class="black-map" viewBox="0 0 1200 620" aria-label="world map">
+            <path class="land" d="M93,176 C123,138 175,122 226,137 C266,148 291,176 317,178 C351,181 370,206 357,238 C345,270 309,273 289,300 C266,331 279,368 246,392 C218,413 177,400 155,374 C132,347 122,310 98,292 C68,268 64,213 93,176 Z" />
+            <path class="land" d="M282,315 C322,330 352,370 355,420 C359,486 323,553 284,536 C250,521 252,467 229,424 C207,384 227,332 282,315 Z" />
+            <path class="land" d="M493,158 C521,124 578,113 621,139 C662,163 675,204 648,231 C619,260 563,240 528,256 C493,272 452,240 459,202 C462,185 476,174 493,158 Z" />
+            <path class="land" d="M585,263 C630,258 677,284 700,327 C727,377 713,453 667,492 C633,521 590,498 571,454 C550,406 530,342 546,300 C554,280 565,269 585,263 Z" />
+            <path class="land" d="M635,176 C683,122 762,105 841,121 C936,141 1016,178 1055,237 C1087,286 1061,335 1006,342 C949,349 917,319 871,335 C824,352 784,380 732,360 C672,337 607,278 610,225 C611,206 621,190 635,176 Z" />
+            <path class="land" d="M860,394 C895,360 953,374 977,419 C1005,472 973,520 919,512 C876,506 837,466 837,426 C837,414 845,403 860,394 Z" />
+            <path class="land" d="M932,512 C990,481 1084,499 1119,551 C1148,594 1070,612 1001,594 C943,579 899,540 932,512 Z" />
+            <path class="land" d="M402,118 C428,102 456,109 470,130 C482,148 467,170 438,169 C410,168 385,147 392,130 C394,125 397,121 402,118 Z" />
+            <path class="land" d="M1073,205 C1095,198 1121,205 1133,224 C1144,241 1130,259 1104,256 C1080,253 1059,233 1064,216 C1066,211 1069,207 1073,205 Z" />
+
+            <path class="country-line" d="M147,164 C180,197 226,202 266,180" />
+            <path class="country-line" d="M113,254 C177,241 239,255 315,236" />
+            <path class="country-line" d="M269,337 C306,375 311,439 285,520" />
+            <path class="country-line" d="M516,163 C546,193 590,203 636,190" />
+            <path class="country-line" d="M573,283 C607,339 609,409 579,462" />
+            <path class="country-line" d="M654,185 C731,219 828,211 936,169" />
+            <path class="country-line" d="M720,298 C807,279 900,304 1009,332" />
+            <path class="country-line" d="M845,128 C829,196 855,258 921,333" />
+            <path class="country-line" d="M849,426 C888,452 934,466 973,452" />
+
+            <g class="country-hotspot is-selected" tabindex="0" role="button" aria-label="show china photos" data-country="china">
+              <ellipse class="hit-zone" cx="888" cy="277" rx="100" ry="78" />
+              <path class="visited" d="M817,228 C852,204 915,209 948,239 C982,270 962,318 904,322 C848,326 790,293 786,257 C784,244 800,236 817,228 Z" />
+              <ellipse class="visited" cx="958" cy="326" rx="9" ry="20" transform="rotate(23 958 326)" />
+            </g>
+
+            <g class="country-hotspot" tabindex="0" role="button" aria-label="show japan photos" data-country="japan">
+              <ellipse class="hit-zone" cx="1028" cy="293" rx="50" ry="76" />
+              <path class="visited" d="M1010,246 C1026,260 1020,280 1002,272 C989,266 992,249 1010,246 Z" />
+              <path class="visited" d="M1030,285 C1047,297 1040,320 1020,313 C1007,308 1012,289 1030,285 Z" />
+            </g>
+
+            <g class="country-hotspot" tabindex="0" role="button" aria-label="show france photos" data-country="france">
+              <ellipse class="hit-zone" cx="582" cy="226" rx="54" ry="48" />
+              <path class="visited" d="M560,200 C580,184 608,194 612,220 C616,248 584,262 562,245 C542,230 540,214 560,200 Z" />
+            </g>
+
+            <g class="country-hotspot" tabindex="0" role="button" aria-label="show monaco photos" data-country="monaco">
+              <ellipse class="hit-zone" cx="612" cy="248" rx="28" ry="22" />
+              <ellipse class="visited" cx="612" cy="248" rx="8" ry="5" />
+            </g>
+
+            <circle class="map-ripple" cx="904" cy="270" r="20"></circle>
+            <circle class="map-dot" cx="904" cy="270" r="6"></circle>
+            <text class="map-label" x="921" y="265">china</text>
+
+            <circle class="map-ripple" cx="1030" cy="294" r="20"></circle>
+            <circle class="map-dot" cx="1030" cy="294" r="6"></circle>
+            <text class="map-label" x="1048" y="290">japan</text>
+
+            <circle class="map-ripple" cx="582" cy="222" r="20"></circle>
+            <circle class="map-dot" cx="582" cy="222" r="6"></circle>
+            <text class="map-label" x="600" y="218">france</text>
+
+            <circle class="map-ripple" cx="612" cy="248" r="16"></circle>
+            <circle class="map-dot" cx="612" cy="248" r="5"></circle>
+            <text class="map-label" x="628" y="253">monaco</text>
+          </svg>
+        </div>
+
+        <aside class="country-preview" aria-live="polite">
+          <div class="preview-top">
+            <p class="preview-kicker">map preview</p>
+            <h3 id="countryTitle">china</h3>
+            <p id="countryMeta">beijing and xi'an, 3 photographs</p>
+          </div>
+          <div class="preview-grid" id="previewGrid"></div>
+        </aside>
       </div>
+    </section>
 
-      <div class="photo-card">
-        <img src="images/kanazawa_1.jpeg" alt="kanazawa photography">
-        <div class="photo-title">kanazawa</div>
+    <section class="section about-section" id="about">
+      <div class="section-head">
+        <h2>about</h2>
+        <p>this is a personal photography portfolio featuring selected works across travel, street scenes, landscapes, and everyday moments.</p>
       </div>
-
-      <div class="photo-card">
-        <img src="images/kanazawa_2.jpeg" alt="kanazawa photography">
-        <div class="photo-title">kanazawa</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/kyoto_1.jpeg" alt="kyoto photography">
-        <div class="photo-title">kyoto</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/kyoto_2.jpeg" alt="kyoto photography">
-        <div class="photo-title">kyoto</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/kyoto_3.jpeg" alt="kyoto photography">
-        <div class="photo-title">kyoto</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/kyoto_4.jpeg" alt="kyoto photography">
-        <div class="photo-title">kyoto</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/kyoto_5.jpeg" alt="kyoto photography">
-        <div class="photo-title">kyoto</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/monaco_1.jpeg" alt="monaco photography">
-        <div class="photo-title">monaco</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/nagahama_1.jpeg" alt="nagahama photography">
-        <div class="photo-title">nagahama</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/paris_1.jpeg" alt="paris photography">
-        <div class="photo-title">paris</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/paris_2.jpeg" alt="paris photography">
-        <div class="photo-title">paris</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/paris_3.jpeg" alt="paris photography">
-        <div class="photo-title">paris</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/shimonada_1.jpeg" alt="shimonada photography">
-        <div class="photo-title">shimonada</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/takayama_1.jpeg" alt="takayama photography">
-        <div class="photo-title">takayama</div>
-      </div>
-
-      <div class="photo-card">
-        <img src="images/xian_1.jpeg" alt="xi'an photography">
-        <div class="photo-title">xi'an</div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="map-section" id="map">
-    <h2>places i’ve captured</h2>
-    <p class="map-intro">
-      a visual map of countries i have photographed, highlighted across the world.
-    </p>
-
-    <div class="map-panel">
-      <svg class="black-map" viewBox="0 0 1200 620" aria-label="world map">
-
-        <!-- abstract world map background -->
-        <path class="land" d="M120,165 C160,105 245,82 325,110 C380,130 420,178 390,225 C365,265 305,250 270,290 C238,326 245,380 198,385 C145,390 95,335 82,282 C68,228 78,190 120,165 Z" />
-        <path class="land" d="M340,330 C390,355 420,415 400,485 C382,548 325,580 300,520 C282,478 298,405 340,330 Z" />
-        <path class="land" d="M515,165 C548,125 615,125 655,165 C690,200 658,244 610,238 C560,232 485,205 515,165 Z" />
-        <path class="land" d="M575,270 C650,262 705,315 708,390 C712,485 642,535 590,468 C548,414 525,302 575,270 Z" />
-        <path class="land" d="M665,160 C750,92 930,102 1035,190 C1120,262 1058,350 938,328 C858,313 822,370 735,330 C650,290 610,210 665,160 Z" />
-        <path class="land" d="M820,365 C885,345 955,390 945,455 C935,520 850,502 812,450 C785,414 785,378 820,365 Z" />
-        <path class="land" d="M910,455 C980,425 1080,452 1110,508 C1140,568 1038,595 960,570 C888,547 850,488 910,455 Z" />
-
-        <!-- white country border feel -->
-        <path class="country-line" d="M170,150 C205,190 260,190 305,145" />
-        <path class="country-line" d="M145,250 C220,232 295,252 355,220" />
-        <path class="country-line" d="M320,350 C365,385 370,445 340,512" />
-        <path class="country-line" d="M555,158 C570,190 602,210 642,200" />
-        <path class="country-line" d="M590,284 C615,340 610,405 585,465" />
-        <path class="country-line" d="M690,178 C755,210 840,202 928,170" />
-        <path class="country-line" d="M745,290 C825,270 905,300 995,318" />
-        <path class="country-line" d="M850,135 C830,195 850,255 920,325" />
-        <path class="country-line" d="M825,405 C860,430 905,442 940,435" />
-
-        <!-- highlighted countries -->
-
-        <!-- china, including taiwan -->
-        <path class="visited" d="M805,220 C845,192 905,200 932,235 C956,268 930,306 880,305 C830,305 782,278 778,250 C775,238 790,228 805,220 Z" />
-        <ellipse class="visited" cx="935" cy="315" rx="10" ry="22" transform="rotate(22 935 315)" />
-
-        <!-- japan -->
-        <path class="visited" d="M980,245 C996,258 990,278 972,270 C960,265 962,248 980,245 Z" />
-        <path class="visited" d="M1005,285 C1020,296 1014,318 995,310 C982,304 988,286 1005,285 Z" />
-
-        <!-- france -->
-        <path class="visited" d="M560,200 C580,184 608,194 612,220 C616,248 584,262 562,245 C542,230 540,214 560,200 Z" />
-
-        <!-- monaco -->
-        <ellipse class="visited" cx="612" cy="248" rx="8" ry="5" />
-
-        <!-- country labels + glow -->
-        <circle class="map-ripple" cx="878" cy="258" r="20"></circle>
-        <circle class="map-dot" cx="878" cy="258" r="6"></circle>
-        <text class="map-label" x="895" y="253">china</text>
-
-        <circle class="map-ripple" cx="1000" cy="286" r="20"></circle>
-        <circle class="map-dot" cx="1000" cy="286" r="6"></circle>
-        <text class="map-label" x="1018" y="282">japan</text>
-
-        <circle class="map-ripple" cx="582" cy="222" r="20"></circle>
-        <circle class="map-dot" cx="582" cy="222" r="6"></circle>
-        <text class="map-label" x="600" y="218">france</text>
-
-        <circle class="map-ripple" cx="612" cy="248" r="16"></circle>
-        <circle class="map-dot" cx="612" cy="248" r="5"></circle>
-        <text class="map-label" x="628" y="253">monaco</text>
-
-      </svg>
-
-      <div class="map-note">
-        highlighted countries represent places photographed or visited.
-      </div>
-    </div>
-  </section>
-
-  <section class="section about-section" id="about">
-    <h2>about</h2>
-    <p>
-      this is a personal photography portfolio featuring selected works across travel,
-      street scenes, landscapes, and everyday moments.
-    </p>
-  </section>
+    </section>
+  </main>
 
   <footer>
     © 2026 whitmanz photography
@@ -732,59 +851,145 @@
   </div>
 
   <script>
-    const cards = document.querySelectorAll('.photo-card');
-
-    cards.forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.setProperty('--x', `${x}%`);
-        card.style.setProperty('--y', `${y}%`);
-      });
-    });
-
+    const cards = [...document.querySelectorAll('.photo-card')];
+    const stage = document.querySelector('.photo-stage');
+    const gallery = document.querySelector('.gallery');
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxCaption = document.getElementById('lightboxCaption');
     const lightboxClose = document.getElementById('lightboxClose');
+    const hotspots = [...document.querySelectorAll('.country-hotspot')];
+    const countryTitle = document.getElementById('countryTitle');
+    const countryMeta = document.getElementById('countryMeta');
+    const previewGrid = document.getElementById('previewGrid');
+
+    const photos = cards.map(card => {
+      const img = card.querySelector('img');
+      return {
+        country: card.dataset.country,
+        city: card.dataset.city,
+        src: img.getAttribute('src'),
+        alt: img.getAttribute('alt')
+      };
+    });
+
+    function openLightbox(photo) {
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightboxCaption.textContent = photo.city;
+      lightbox.classList.add('active');
+      document.body.classList.add('preview-open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.classList.remove('preview-open');
+      setTimeout(() => {
+        lightboxImage.src = '';
+      }, 280);
+    }
 
     cards.forEach(card => {
       card.addEventListener('click', () => {
         const img = card.querySelector('img');
-        const title = card.querySelector('.photo-title')?.textContent || 'photography';
-
-        lightboxImage.src = img.src;
-        lightboxImage.alt = img.alt;
-        lightboxCaption.textContent = title;
-
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        openLightbox({
+          src: img.getAttribute('src'),
+          alt: img.getAttribute('alt'),
+          city: card.dataset.city
+        });
       });
     });
 
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-      setTimeout(() => {
-        lightboxImage.src = '';
-      }, 350);
+    function updateMagnifier(pointerX) {
+      const maxDistance = 170;
+
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const distance = Math.abs(pointerX - center);
+        const strength = Math.max(0, 1 - distance / maxDistance);
+        const scale = 1 + strength * 0.22;
+
+        card.style.setProperty('--scale', scale.toFixed(3));
+        card.classList.toggle('is-active', strength > 0.78);
+        card.classList.toggle('is-near', strength > 0.22);
+      });
     }
 
+    function resetMagnifier() {
+      cards.forEach(card => {
+        card.style.removeProperty('--scale');
+        card.classList.remove('is-active', 'is-near');
+      });
+    }
+
+    gallery.addEventListener('pointermove', event => updateMagnifier(event.clientX));
+    gallery.addEventListener('pointerleave', resetMagnifier);
+
+    stage.addEventListener('wheel', event => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+        return;
+      }
+
+      event.preventDefault();
+      stage.scrollLeft += event.deltaY;
+    }, { passive: false });
+
+    function formatPlaces(countryPhotos) {
+      const cities = [...new Set(countryPhotos.map(photo => photo.city))];
+      const count = countryPhotos.length;
+      const names = cities.length > 1
+        ? `${cities.slice(0, -1).join(', ')} and ${cities.at(-1)}`
+        : cities[0];
+
+      return `${names}, ${count} photograph${count === 1 ? '' : 's'}`;
+    }
+
+    function showCountry(country) {
+      const countryPhotos = photos.filter(photo => photo.country === country);
+
+      hotspots.forEach(hotspot => {
+        hotspot.classList.toggle('is-selected', hotspot.dataset.country === country);
+      });
+
+      countryTitle.textContent = country;
+      countryMeta.textContent = formatPlaces(countryPhotos);
+      previewGrid.innerHTML = '';
+
+      countryPhotos.slice(0, 5).forEach(photo => {
+        const button = document.createElement('button');
+        button.className = 'preview-thumb';
+        button.type = 'button';
+        button.setAttribute('aria-label', `open ${photo.city} photo`);
+        button.innerHTML = `<img src="${photo.src}" alt="${photo.alt}">`;
+        button.addEventListener('click', () => openLightbox(photo));
+        previewGrid.appendChild(button);
+      });
+    }
+
+    hotspots.forEach(hotspot => {
+      hotspot.addEventListener('click', () => showCountry(hotspot.dataset.country));
+      hotspot.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          showCountry(hotspot.dataset.country);
+        }
+      });
+    });
+
     lightboxClose.addEventListener('click', closeLightbox);
-
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) {
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && lightbox.classList.contains('active')) {
         closeLightbox();
       }
     });
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-        closeLightbox();
-      }
-    });
+    showCountry('china');
   </script>
-
 </body>
 </html>
