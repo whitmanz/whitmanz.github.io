@@ -35,7 +35,8 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(236, 233, 227, 0.76) 34%, rgba(223, 227, 226, 0.62) 68%, rgba(247, 247, 245, 1)),
+        repeating-linear-gradient(90deg, rgba(142, 133, 120, 0.035) 0 1px, transparent 1px 64px),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.93), rgba(238, 234, 226, 0.78) 32%, rgba(222, 229, 226, 0.62) 68%, rgba(247, 247, 245, 1)),
         #f7f7f5;
       color: var(--ink);
       overflow-x: hidden;
@@ -43,6 +44,57 @@
 
     body.preview-open {
       overflow: hidden;
+    }
+
+    .intro-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: grid;
+      place-items: center;
+      background:
+        repeating-linear-gradient(90deg, rgba(145, 128, 102, 0.055) 0 1px, transparent 1px 58px),
+        radial-gradient(circle at 50% 46%, rgba(255,255,255,0.95), rgba(238,235,228,0.92) 54%, rgba(219,225,222,0.88));
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .intro-loader.is-done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-mark {
+      display: flex;
+      gap: 0.015em;
+      color: rgba(29, 29, 31, 0.82);
+      font-size: clamp(38px, 8vw, 96px);
+      font-weight: 650;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: lowercase;
+    }
+
+    .intro-mark span {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(10px);
+      transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(0.94);
+      animation: nameGather 1.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: var(--d);
+    }
+
+    @keyframes nameGather {
+      70% {
+        opacity: 1;
+        filter: blur(0);
+      }
+
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate(0, 0) rotate(0) scale(1);
+      }
     }
 
     nav {
@@ -97,10 +149,24 @@
         var(--hero-photo) center / cover no-repeat;
     }
 
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        repeating-linear-gradient(90deg, rgba(111, 91, 63, 0.08) 0 1px, transparent 1px 74px),
+        repeating-radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.13) 0 1px, transparent 2px 42px);
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
     header::after {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
       background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(184,180,172,0.16), rgba(184,190,177,0.12));
       pointer-events: none;
     }
@@ -446,6 +512,7 @@
       z-index: 4;
       display: flex;
       gap: 10px;
+      justify-content: center;
       overflow-x: auto;
       padding: 10px 2px 18px;
       opacity: 0;
@@ -643,6 +710,22 @@
 </head>
 
 <body>
+  <div class="intro-loader" id="introLoader" aria-hidden="true">
+    <div class="intro-mark" aria-label="whitmanzhou">
+      <span style="--x:-38px; --y:18px; --r:-9deg; --d:0.02s">w</span>
+      <span style="--x:22px; --y:-24px; --r:8deg; --d:0.08s">h</span>
+      <span style="--x:-14px; --y:32px; --r:-6deg; --d:0.12s">i</span>
+      <span style="--x:30px; --y:16px; --r:10deg; --d:0.16s">t</span>
+      <span style="--x:-28px; --y:-22px; --r:-8deg; --d:0.20s">m</span>
+      <span style="--x:16px; --y:26px; --r:7deg; --d:0.24s">a</span>
+      <span style="--x:-20px; --y:-18px; --r:-5deg; --d:0.28s">n</span>
+      <span style="--x:34px; --y:-10px; --r:9deg; --d:0.32s">z</span>
+      <span style="--x:-16px; --y:24px; --r:-7deg; --d:0.36s">h</span>
+      <span style="--x:22px; --y:-26px; --r:8deg; --d:0.40s">o</span>
+      <span style="--x:-30px; --y:12px; --r:-8deg; --d:0.44s">u</span>
+    </div>
+  </div>
+
   <nav aria-label="main navigation">
     <a href="#portfolio">photos</a>
     <a href="#map">map</a>
@@ -899,7 +982,7 @@
         setHeroPhoto(countryPhotos[0].src);
       }
 
-      countryPhotos.slice(0, 4).forEach(photo => {
+      countryPhotos.forEach(photo => {
         const button = document.createElement('button');
         button.className = 'preview-thumb';
         button.type = 'button';
@@ -934,6 +1017,13 @@
       if (event.key === 'Escape' && lightbox.classList.contains('active')) {
         closeLightbox();
       }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const introLoader = document.getElementById('introLoader');
+      setTimeout(() => {
+        introLoader?.classList.add('is-done');
+      }, 1750);
     });
 
   </script>
