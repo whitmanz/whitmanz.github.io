@@ -12,17 +12,17 @@
     }
 
     :root {
-      --ink: #25231f;
-      --muted: rgba(37, 35, 31, 0.64);
-      --line: rgba(105, 82, 54, 0.22);
-      --glass: rgba(248, 246, 239, 0.72);
-      --sand: #f2efe5;
-      --sand-deep: #e2d8c5;
-      --wood: #8b6f4d;
-      --wood-dark: #4d3926;
-      --moss: #687562;
-      --moss-soft: #aeb8a6;
-      --paper: #fbfaf6;
+      --ink: #f4f1e8;
+      --muted: rgba(244, 241, 232, 0.62);
+      --line: rgba(210, 196, 160, 0.18);
+      --glass: rgba(10, 20, 15, 0.68);
+      --sand: #d6c7a5;
+      --sand-deep: #7a6a46;
+      --wood: #947449;
+      --wood-dark: #100d08;
+      --moss: #6f8064;
+      --moss-soft: #2f3d2d;
+      --paper: #08100c;
       --hero-photo: url("thumbs/monaco_2.jpeg");
     }
 
@@ -35,12 +35,8 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       background:
-        radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.74), transparent 28%),
-        radial-gradient(ellipse at 86% 80%, rgba(104, 117, 98, 0.18), transparent 32%),
-        repeating-radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.20) 0 1px, transparent 2px 44px),
-        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.055) 0 1px, transparent 1px 72px),
-        repeating-linear-gradient(0deg, rgba(102, 76, 45, 0.030) 0 1px, transparent 1px 18px),
-        linear-gradient(135deg, #fbfaf6, #f1ecdf 40%, #dfe7dd 100%);
+        linear-gradient(180deg, rgba(8,16,12,0.96), rgba(10,24,17,0.98)),
+        #08100c;
       color: var(--ink);
       overflow-x: hidden;
     }
@@ -56,9 +52,7 @@
       display: grid;
       place-items: center;
       background:
-        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.07) 0 1px, transparent 1px 62px),
-        repeating-radial-gradient(circle at 50% 55%, rgba(255,255,255,0.18) 0 1px, transparent 2px 40px),
-        radial-gradient(circle at 50% 46%, rgba(251,250,246,0.97), rgba(242,239,229,0.94) 54%, rgba(218,228,215,0.90));
+        linear-gradient(180deg, #06110c, #0b1710 54%, #06100b);
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
@@ -71,7 +65,7 @@
     .intro-mark {
       display: flex;
       gap: 0.015em;
-      color: rgba(29, 29, 31, 0.82);
+      color: rgba(243, 239, 228, 0.86);
       font-size: clamp(38px, 8vw, 96px);
       font-weight: 650;
       letter-spacing: 0;
@@ -110,10 +104,10 @@
       gap: 6px;
       align-items: center;
       padding: 7px;
-      border: 1px solid rgba(105, 82, 54, 0.24);
+      border: 1px solid rgba(210, 196, 160, 0.14);
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(251, 250, 246, 0.86), rgba(226, 216, 197, 0.70), rgba(174, 184, 166, 0.58));
-      box-shadow: 0 18px 50px rgba(77, 57, 38, 0.14);
+      background: rgba(9, 20, 14, 0.68);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.34);
       transform: translateX(-50%);
       backdrop-filter: blur(22px) saturate(1.6);
       -webkit-backdrop-filter: blur(22px) saturate(1.6);
@@ -122,7 +116,7 @@
     nav a {
       padding: 8px 13px;
       border-radius: 999px;
-      color: rgba(77, 57, 38, 0.82);
+      color: rgba(243, 239, 228, 0.78);
       font-size: 13px;
       line-height: 1;
       text-decoration: none;
@@ -131,7 +125,7 @@
     }
 
     nav a:hover {
-      background: rgba(104, 117, 98, 0.14);
+      background: rgba(142, 155, 123, 0.14);
       color: var(--ink);
     }
 
@@ -148,9 +142,10 @@
       overflow: hidden;
       text-align: center;
       background:
-        linear-gradient(180deg, rgba(251,250,246,0.68), rgba(242,239,229,0.54) 44%, rgba(251,250,246,0.98)),
-        linear-gradient(rgba(77, 57, 38, 0.20), rgba(77, 57, 38, 0.20)),
+        linear-gradient(180deg, rgba(5,10,7,0.18), rgba(6,13,9,0.28) 46%, rgba(8,16,12,0.70)),
+        linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)),
         var(--hero-photo) center / cover no-repeat;
+      transition: background 0.42s ease;
     }
 
     header::before {
@@ -158,12 +153,8 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background:
-        repeating-linear-gradient(90deg, rgba(77, 57, 38, 0.12) 0 1px, transparent 1px 70px),
-        repeating-radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.13) 0 1px, transparent 2px 42px),
-        linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-      mix-blend-mode: soft-light;
-      opacity: 0.7;
+      background: linear-gradient(90deg, rgba(4,9,6,0.18), transparent 22%, transparent 78%, rgba(4,9,6,0.18));
+      opacity: 0.64;
       pointer-events: none;
     }
 
@@ -172,7 +163,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(184,180,172,0.16), rgba(184,190,177,0.12));
+      background: linear-gradient(135deg, rgba(3,8,5,0.08), rgba(111,128,100,0.10), rgba(148,116,73,0.08));
       pointer-events: none;
     }
 
@@ -185,7 +176,7 @@
 
     .eyebrow {
       margin: 0 0 18px;
-      color: rgba(77, 57, 38, 0.62);
+      color: rgba(216, 200, 170, 0.72);
       font-size: 15px;
       font-weight: 600;
     }
@@ -197,13 +188,13 @@
       letter-spacing: 0;
       line-height: 0.92;
       text-transform: lowercase;
-      color: rgba(37, 35, 31, 0.92);
+      color: rgba(243, 239, 228, 0.92);
     }
 
     .hero-text {
       max-width: 650px;
       margin: 28px auto 0;
-      color: rgba(77, 57, 38, 0.68);
+      color: rgba(243, 239, 228, 0.70);
       font-size: clamp(19px, 2.4vw, 28px);
       line-height: 1.28;
     }
@@ -247,9 +238,7 @@
 
     .section {
       padding: 86px max(24px, 6vw);
-      background:
-        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.035) 0 1px, transparent 1px 76px),
-        linear-gradient(180deg, rgba(251,250,246,0.68), rgba(242,239,229,0.52));
+      background: linear-gradient(180deg, #08100c, #0d1b13);
     }
 
     .section-head {
@@ -278,7 +267,7 @@
       letter-spacing: 0;
       line-height: 0.96;
       text-transform: lowercase;
-      color: rgba(37, 35, 31, 0.88);
+      color: rgba(243, 239, 228, 0.88);
     }
 
     .section p,
@@ -300,9 +289,7 @@
       padding: 42px max(24px, 6vw) 60px;
       scroll-padding-inline: max(24px, 6vw);
       scrollbar-width: none;
-      background:
-        radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.50), transparent 55%),
-        repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 0 1px, transparent 2px 38px);
+      background: linear-gradient(90deg, rgba(6,14,10,0), rgba(111,128,100,0.08), rgba(6,14,10,0));
     }
 
     .photo-stage::-webkit-scrollbar {
@@ -325,15 +312,15 @@
       border: 0;
       border-radius: 18px;
       overflow: hidden;
-      background: linear-gradient(135deg, #e7dfcf, #fbfaf6);
-      box-shadow: 0 10px 30px rgba(77, 57, 38, 0.15);
-      outline: 1px solid rgba(105, 82, 54, 0.16);
+      background: linear-gradient(135deg, #1d1c17, #0d0f0c);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.34);
+      outline: 1px solid rgba(224, 206, 172, 0.13);
       cursor: pointer;
       transition: box-shadow 0.24s ease;
     }
 
     .photo-card:hover {
-      box-shadow: 0 18px 42px rgba(77, 57, 38, 0.22);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.46);
     }
 
     .photo-card img {
@@ -356,7 +343,7 @@
       padding: 7px 9px;
       border-radius: 999px;
       color: white;
-      background: rgba(77, 57, 38, 0.52);
+      background: rgba(11, 12, 10, 0.60);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       font-size: 12px;
@@ -377,9 +364,7 @@
     .map-section {
       min-height: 100svh;
       padding: 86px max(24px, 6vw) 56px;
-      background:
-        repeating-radial-gradient(circle at 50% 46%, rgba(255,255,255,0.22) 0 1px, transparent 2px 42px),
-        linear-gradient(180deg, rgba(251,250,246,0.96), rgba(242,239,229,0.94));
+      background: linear-gradient(180deg, #08100c, #0c1a12);
       scroll-snap-align: start;
     }
 
@@ -389,10 +374,10 @@
     }
 
     .map-panel {
-      border: 1px solid rgba(105, 82, 54, 0.24);
+      border: 1px solid rgba(224, 206, 172, 0.18);
       border-radius: 28px;
       overflow: hidden;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45), 0 28px 80px rgba(77, 57, 38, 0.13);
+      box-shadow: inset 0 0 0 1px rgba(243,239,228,0.08), 0 28px 80px rgba(0,0,0,0.36);
     }
 
     .map-panel {
@@ -401,8 +386,7 @@
       min-height: 500px;
       padding: 28px;
       background:
-        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.94), transparent 26%),
-        linear-gradient(135deg, #fbfaf6, #eadfca 45%, #dce6d8 78%, #fbfaf6);
+        linear-gradient(135deg, #0a130e, #121a12 45%, #182719 78%, #08100c);
     }
 
     .map-panel::before,
@@ -415,23 +399,13 @@
     }
 
     .map-panel::before {
-      background:
-        repeating-radial-gradient(
-          circle at 66% 46%,
-          rgba(255, 255, 255, 0.24) 0,
-          rgba(255, 255, 255, 0.16) 1px,
-          transparent 2px,
-          transparent 36px
-      );
-      opacity: 0.62;
+      background: linear-gradient(90deg, rgba(210,196,160,0.035), transparent 20%, transparent 80%, rgba(210,196,160,0.035));
+      opacity: 0.72;
     }
 
     .map-panel::after {
-      background:
-        repeating-linear-gradient(105deg, rgba(132, 117, 92, 0.035) 0 1px, transparent 1px 70px),
-        radial-gradient(circle at 72% 43%, rgba(255,255,255,0.42), transparent 18%),
-        linear-gradient(120deg, transparent 28%, rgba(255,255,255,0.20), transparent 68%);
-      opacity: 0.74;
+      background: linear-gradient(120deg, transparent 28%, rgba(111,128,100,0.08), transparent 68%);
+      opacity: 0.62;
     }
 
     .world-map {
@@ -448,14 +422,14 @@
 
     .map-land {
       fill: rgba(255, 255, 255, 0.22);
-      stroke: rgba(77, 57, 38, 0.58);
+      stroke: rgba(216, 200, 170, 0.52);
       stroke-width: 2;
       vector-effect: non-scaling-stroke;
     }
 
     .map-mesh {
       fill: none;
-      stroke: rgba(77, 57, 38, 0.36);
+      stroke: rgba(216, 200, 170, 0.28);
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-width: 1.5;
@@ -476,9 +450,9 @@
       gap: 7px;
       border: 0;
       border-radius: 999px;
-      background: rgba(251, 250, 246, 0.72);
-      color: rgba(77, 57, 38, 0.88);
-      box-shadow: 0 12px 28px rgba(77, 57, 38, 0.14);
+      background: rgba(13, 15, 12, 0.68);
+      color: rgba(243, 239, 228, 0.82);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.28);
       cursor: pointer;
       font: inherit;
       font-size: 13px;
@@ -503,7 +477,7 @@
 
     .country-hotspot:hover,
     .country-hotspot:focus {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(31, 34, 27, 0.92);
       color: var(--moss);
       outline: none;
       transform: translate(-50%, -50%) scale(1.06);
@@ -579,15 +553,13 @@
       place-items: center;
       min-height: 72svh;
       text-align: center;
-      background:
-        repeating-linear-gradient(90deg, rgba(102, 76, 45, 0.045) 0 1px, transparent 1px 70px),
-        linear-gradient(180deg, #f8f4ea, #eef3ec);
+      background: linear-gradient(180deg, #08100c, #101d14);
       scroll-snap-align: start;
     }
 
     footer {
       padding: 34px 24px;
-      color: rgba(77, 57, 38, 0.54);
+      color: rgba(216, 200, 170, 0.56);
       font-size: 13px;
       text-align: center;
     }
@@ -599,7 +571,7 @@
       display: grid;
       place-items: center;
       padding: 28px;
-      background: rgba(242, 239, 229, 0.78);
+      background: rgba(8, 9, 7, 0.78);
       backdrop-filter: blur(34px) saturate(1.4);
       -webkit-backdrop-filter: blur(34px) saturate(1.4);
       opacity: 0;
@@ -654,7 +626,7 @@
       height: 42px;
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 999px;
-      background: rgba(251, 250, 246, 0.80);
+      background: rgba(20, 22, 18, 0.82);
       color: var(--ink);
       cursor: pointer;
       font-size: 24px;
@@ -955,6 +927,7 @@
     }
 
     function openLightbox(photo) {
+      setHeroPhoto(photo.thumb || photo.full);
       lightboxImage.src = photo.full;
       lightboxImage.alt = photo.alt;
       lightboxCaption.textContent = photo.city;
