@@ -48,6 +48,21 @@
       overflow: hidden;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.20) 0 0.5px, transparent 0.8px),
+        radial-gradient(circle at 72% 44%, rgba(255,255,255,0.16) 0 0.5px, transparent 0.8px),
+        radial-gradient(circle at 34% 82%, rgba(0,0,0,0.22) 0 0.5px, transparent 0.8px);
+      background-size: 31px 31px, 43px 43px, 37px 37px;
+      opacity: 0.045;
+      mix-blend-mode: soft-light;
+    }
+
     .intro-loader {
       position: fixed;
       inset: 0;
@@ -55,39 +70,24 @@
       display: grid;
       place-items: center;
       background:
-        radial-gradient(circle at 50% 54%, rgba(201, 198, 190, 0.12), transparent 9%),
+        radial-gradient(circle at 50% 54%, rgba(201, 198, 190, 0.08), transparent 14%),
         linear-gradient(180deg, #111211, #1a1b1a 54%, #0d0e0e);
       overflow: hidden;
       transition: opacity 1.1s ease, visibility 1.1s ease;
     }
 
-    .intro-loader::before,
-    .intro-loader::after {
+    .intro-loader::before {
       content: "";
       position: absolute;
-      inset: -18vmax;
-      border-radius: 50%;
+      inset: 0;
+      background:
+        radial-gradient(circle at 32% 44%, rgba(241,239,234,0.10), transparent 1px),
+        radial-gradient(circle at 58% 35%, rgba(201,198,190,0.11), transparent 1px),
+        radial-gradient(circle at 74% 62%, rgba(241,239,234,0.08), transparent 1px);
+      background-size: 43px 43px, 61px 61px, 79px 79px;
+      opacity: 0.24;
       pointer-events: none;
-    }
-
-    .intro-loader::before {
-      background:
-        repeating-radial-gradient(circle at 50% 50%,
-          transparent 0,
-          transparent 34px,
-          rgba(201, 198, 190, 0.055) 35px,
-          transparent 37px);
-      opacity: 0;
-      transform: scale(0.58);
-      animation: waterGather 3.35s cubic-bezier(0.2, 0.7, 0.18, 1) forwards;
-    }
-
-    .intro-loader::after {
-      background:
-        linear-gradient(115deg, transparent 32%, rgba(241,239,234,0.10), transparent 62%);
-      opacity: 0;
-      transform: translateX(-10%) rotate(8deg);
-      animation: waterSheen 3.45s ease forwards;
+      animation: dustField 3.9s ease forwards;
     }
 
     .intro-loader.is-done {
@@ -108,6 +108,29 @@
       line-height: 1;
       text-transform: lowercase;
       text-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+    }
+
+    .intro-shards {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .intro-shards i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 1px;
+      background: rgba(222, 219, 210, var(--alpha));
+      box-shadow: 0 0 10px rgba(241,239,234,0.12);
+      opacity: 0;
+      transform: translate(var(--sx), var(--sy)) rotate(var(--rot)) scale(0.5);
+      animation: shardSettle 3.35s cubic-bezier(0.16, 0.72, 0.18, 1) forwards;
+      animation-delay: var(--delay);
     }
 
     .intro-mark span {
@@ -144,35 +167,19 @@
       animation-delay: calc(var(--d) + 0.22s);
     }
 
-    @keyframes waterGather {
+    @keyframes dustField {
       0% {
         opacity: 0;
-        transform: scale(0.52);
+        transform: scale(1);
       }
 
-      30% {
-        opacity: 0.68;
+      34% {
+        opacity: 0.26;
       }
 
       100% {
         opacity: 0.08;
-        transform: scale(1.18);
-      }
-    }
-
-    @keyframes waterSheen {
-      0%, 24% {
-        opacity: 0;
-        transform: translateX(-12%) rotate(8deg);
-      }
-
-      58% {
-        opacity: 0.38;
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateX(11%) rotate(8deg);
+        transform: scale(1.05);
       }
     }
 
@@ -214,6 +221,27 @@
         opacity: 0;
         filter: blur(0);
         transform: translate(0, 0) rotate(0) scale(1);
+      }
+    }
+
+    @keyframes shardSettle {
+      0% {
+        opacity: 0;
+        transform: translate(var(--sx), var(--sy)) rotate(var(--rot)) scale(0.35);
+      }
+
+      18% {
+        opacity: var(--alpha);
+      }
+
+      70% {
+        opacity: calc(var(--alpha) * 0.92);
+        transform: translate(var(--mx), var(--my)) rotate(calc(var(--rot) * 0.25)) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--ex), var(--ey)) rotate(0deg) scale(0.18);
       }
     }
 
@@ -270,6 +298,14 @@
       transition: background 0.42s ease;
     }
 
+    body:not(.intro-complete) header {
+      filter: brightness(0.78) saturate(0.86);
+    }
+
+    body.intro-complete header {
+      animation: heroBreathe 1.65s cubic-bezier(0.18, 0.72, 0.18, 1) both;
+    }
+
     header::before {
       content: "";
       position: absolute;
@@ -294,6 +330,15 @@
       z-index: 2;
       width: min(980px, 100%);
       padding-top: 7vh;
+    }
+
+    body:not(.intro-complete) .hero-inner {
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+    }
+
+    body.intro-complete .hero-inner {
+      animation: heroTextArrive 1.45s cubic-bezier(0.18, 0.72, 0.18, 1) 0.1s both;
     }
 
     .eyebrow {
@@ -355,6 +400,28 @@
       45% {
         transform: translate(-50%, 13px);
         opacity: 0.9;
+      }
+    }
+
+    @keyframes heroBreathe {
+      0% {
+        filter: brightness(0.78) saturate(0.86);
+      }
+
+      100% {
+        filter: brightness(1) saturate(1);
+      }
+    }
+
+    @keyframes heroTextArrive {
+      0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -608,7 +675,7 @@
 
     .world-map {
       position: absolute;
-      inset: 66px 20px 20px;
+      inset: 88px 20px 20px;
       z-index: 2;
     }
 
@@ -640,6 +707,21 @@
       line-height: 1;
       text-transform: lowercase;
       white-space: nowrap;
+    }
+
+    .map-note {
+      position: absolute;
+      top: 62px;
+      left: 28px;
+      right: 28px;
+      z-index: 5;
+      margin: 0;
+      color: rgba(241, 239, 234, 0.50);
+      font-size: 13px;
+      line-height: 1.35;
+      text-align: center;
+      text-transform: lowercase;
+      pointer-events: none;
     }
 
     .world-map svg {
@@ -869,6 +951,38 @@
       background: #fff;
     }
 
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      z-index: 3001;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(205, 200, 190, 0.22);
+      border-radius: 999px;
+      background: rgba(28, 29, 29, 0.72);
+      color: rgba(241, 239, 234, 0.88);
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+      transform: translateY(-50%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(75, 75, 70, 0.84);
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .lightbox-prev {
+      left: 24px;
+    }
+
+    .lightbox-next {
+      right: 24px;
+    }
+
     @media (max-width: 1180px) {
       .gallery {
         column-count: 3;
@@ -933,6 +1047,11 @@
         transform: none;
       }
 
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+      }
+
       .map-panel {
         min-height: auto;
         border-radius: 22px;
@@ -953,6 +1072,7 @@
 
 <body>
   <div class="intro-loader" id="introLoader" aria-hidden="true">
+    <div class="intro-shards" id="introShards"></div>
     <div class="intro-mark" aria-label="whitmanz.pics">
       <span data-letter="w" style="--x:-86px; --y:34px; --r:-16deg; --d:0.08s">w</span>
       <span data-letter="h" style="--x:58px; --y:-46px; --r:15deg; --d:0.18s">h</span>
@@ -1113,6 +1233,7 @@
           <div class="map-counter" aria-live="polite">
             <span id="mapCounter">china | cities: 2, photos: 3</span>
           </div>
+          <p class="map-note" id="mapNote">beijing and xi'an, dense light and old stone.</p>
 
           <div class="world-map" aria-hidden="true">
             <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid meet">
@@ -1163,6 +1284,8 @@
 
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" aria-label="close preview">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="previous photo">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="next photo">›</button>
     <div class="lightbox-content">
       <img id="lightboxImage" src="" alt="">
       <div class="lightbox-caption" id="lightboxCaption"></div>
@@ -1180,6 +1303,18 @@
     const hotspots = [...document.querySelectorAll('.country-hotspot')];
     const previewGrid = document.getElementById('previewGrid');
     const mapCounter = document.getElementById('mapCounter');
+    const mapNote = document.getElementById('mapNote');
+    const introShards = document.getElementById('introShards');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    let currentPhotoIndex = 0;
+
+    const countryNotes = {
+      china: "beijing and xi'an, dense light and old stone.",
+      japan: "kyoto, kanazawa, nagahama, shimonada, takayama; quiet rooms and passing weather.",
+      france: "paris, soft windows and small reflections.",
+      monaco: "monaco, blue surfaces and compact light."
+    };
 
     const photos = cards.map(card => {
       const img = card.querySelector('img');
@@ -1204,11 +1339,18 @@
       document.documentElement.style.setProperty('--hero-photo', `url("${src}")`);
     }
 
-    function openLightbox(photo) {
+    function renderLightboxPhoto(index) {
+      currentPhotoIndex = (index + photos.length) % photos.length;
+      const photo = photos[currentPhotoIndex];
       setHeroPhoto(photo.thumb || photo.full);
       lightboxImage.src = photo.full;
       lightboxImage.alt = photo.alt;
       lightboxCaption.textContent = photo.city;
+    }
+
+    function openLightbox(photo) {
+      const index = photos.findIndex(item => item.full === photo.full);
+      renderLightboxPhoto(index >= 0 ? index : 0);
       lightbox.classList.add('active');
       document.body.classList.add('preview-open');
     }
@@ -1229,15 +1371,36 @@
       });
     }
 
-    cards.forEach(card => {
+    function createIntroShards() {
+      const total = 132;
+      const nameWidth = Math.min(window.innerWidth * 0.58, 560);
+
+      for (let index = 0; index < total; index += 1) {
+        const shard = document.createElement('i');
+        const endX = (Math.random() - 0.5) * nameWidth;
+        const endY = (Math.random() - 0.5) * 74;
+        const midX = endX + (Math.random() - 0.5) * 120;
+        const midY = endY + (Math.random() - 0.5) * 90;
+        const startX = (Math.random() - 0.5) * window.innerWidth * 1.15;
+        const startY = (Math.random() - 0.5) * window.innerHeight * 1.05;
+
+        shard.style.setProperty('--sx', `${startX}px`);
+        shard.style.setProperty('--sy', `${startY}px`);
+        shard.style.setProperty('--mx', `${midX}px`);
+        shard.style.setProperty('--my', `${midY}px`);
+        shard.style.setProperty('--ex', `${endX}px`);
+        shard.style.setProperty('--ey', `${endY}px`);
+        shard.style.setProperty('--rot', `${Math.round((Math.random() - 0.5) * 260)}deg`);
+        shard.style.setProperty('--size', `${(Math.random() * 2.4 + 0.8).toFixed(2)}px`);
+        shard.style.setProperty('--alpha', `${(Math.random() * 0.42 + 0.25).toFixed(2)}`);
+        shard.style.setProperty('--delay', `${(Math.random() * 1.15).toFixed(2)}s`);
+        introShards.appendChild(shard);
+      }
+    }
+
+    cards.forEach((card, index) => {
       card.addEventListener('click', () => {
-        const img = card.querySelector('img');
-        openLightbox({
-          thumb: img.getAttribute('src'),
-          full: img.getAttribute('data-full') || img.getAttribute('src'),
-          alt: img.getAttribute('alt'),
-          city: card.dataset.city
-        });
+        openLightbox(photos[index]);
       });
     });
 
@@ -1272,6 +1435,7 @@
     function updateMapCounter(country, countryPhotos) {
       const cityCount = new Set(countryPhotos.map(photo => photo.city)).size;
       mapCounter.textContent = `${country} | cities: ${cityCount}, photos: ${countryPhotos.length}`;
+      mapNote.textContent = countryNotes[country] || "";
     }
 
     function showCountry(country, hotspot) {
@@ -1315,23 +1479,39 @@
     });
 
     lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => renderLightboxPhoto(currentPhotoIndex - 1));
+    lightboxNext.addEventListener('click', () => renderLightboxPhoto(currentPhotoIndex + 1));
     lightbox.addEventListener('click', event => {
       if (event.target === lightbox) {
         closeLightbox();
       }
     });
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+      if (!lightbox.classList.contains('active')) {
+        return;
+      }
+
+      if (event.key === 'Escape') {
         closeLightbox();
+      }
+
+      if (event.key === 'ArrowLeft') {
+        renderLightboxPhoto(currentPhotoIndex - 1);
+      }
+
+      if (event.key === 'ArrowRight') {
+        renderLightboxPhoto(currentPhotoIndex + 1);
       }
     });
 
     window.addEventListener('DOMContentLoaded', () => {
       const introLoader = document.getElementById('introLoader');
+      createIntroShards();
       preloadAllPhotos();
       updateMapCounter('china', photos.filter(photo => photo.country === 'china'));
       setTimeout(() => {
         introLoader?.classList.add('is-done');
+        document.body.classList.add('intro-complete');
       }, 3650);
     });
 
