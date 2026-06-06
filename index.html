@@ -486,6 +486,53 @@
       padding-top: 6px;
     }
 
+    .active-trace {
+      position: fixed;
+      left: var(--trace-left, 0);
+      top: var(--trace-top, 0);
+      z-index: 8;
+      width: var(--trace-width, 0);
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201,198,190,0.66), rgba(201,198,190,0.20), transparent);
+      opacity: 0;
+      pointer-events: none;
+      transform-origin: left center;
+      transition: opacity 0.26s ease, top 0.34s ease, left 0.34s ease, width 0.34s ease;
+    }
+
+    .active-trace.is-visible {
+      opacity: 0.78;
+      animation: tracePulse 0.82s ease both;
+    }
+
+    .active-trace::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: -3px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(241, 239, 234, 0.92);
+      box-shadow: 0 0 18px rgba(201,198,190,0.38);
+    }
+
+    @keyframes tracePulse {
+      0% {
+        transform: scaleX(0.24);
+        opacity: 0;
+      }
+
+      45% {
+        opacity: 0.86;
+      }
+
+      100% {
+        transform: scaleX(1);
+        opacity: 0.68;
+      }
+    }
+
     .portfolio-name {
       margin: 0 0 58px;
       color: rgba(241, 239, 234, 0.84);
@@ -496,15 +543,28 @@
       text-transform: lowercase;
     }
 
-    .portfolio-sidebar h2 {
+    .selected-works {
       display: inline-block;
       margin: 0;
+      border: 0;
       border-bottom: 1px solid rgba(201, 198, 190, 0.58);
+      padding: 0;
+      background: transparent;
       color: rgba(241, 239, 234, 0.92);
+      cursor: pointer;
+      font: inherit;
       font-size: 19px;
       font-weight: 560;
       line-height: 1.25;
       text-transform: none;
+      transition: color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .selected-works:hover,
+    .selected-works.is-active {
+      border-color: rgba(241, 239, 234, 0.72);
+      color: rgba(241, 239, 234, 0.98);
+      transform: translateX(4px);
     }
 
     .portfolio-note {
@@ -515,10 +575,16 @@
       line-height: 1.6;
     }
 
+    .project-panel,
     .country-panel {
       margin-top: 54px;
     }
 
+    .country-panel {
+      margin-top: 42px;
+    }
+
+    .project-kicker,
     .country-kicker {
       margin: 0 0 16px;
       color: rgba(201, 198, 190, 0.50);
@@ -528,12 +594,14 @@
       text-transform: uppercase;
     }
 
+    .project-list,
     .country-list {
       display: grid;
       gap: 7px;
       justify-items: start;
     }
 
+    .project-item,
     .country-filter {
       appearance: none;
       border: 0;
@@ -550,13 +618,38 @@
       transition: color 0.18s ease, transform 0.18s ease;
     }
 
+    .project-item {
+      cursor: pointer;
+      color: rgba(241, 239, 234, 0.42);
+    }
+
+    .project-item::after {
+      content: "soon";
+      display: inline-block;
+      margin-left: 8px;
+      color: rgba(201, 198, 190, 0.36);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      vertical-align: 1px;
+      transition: color 0.18s ease;
+    }
+
+    .project-item.is-active::after {
+      content: "open";
+      color: rgba(241, 239, 234, 0.62);
+    }
+
     .country-filter:hover,
+    .project-item:hover,
+    .project-item.is-active,
     .country-filter.is-active {
       color: rgba(241, 239, 234, 0.95);
       transform: translateX(4px);
     }
 
     .portfolio-wall {
+      position: relative;
       min-width: 0;
       padding-bottom: 16px;
     }
@@ -565,6 +658,97 @@
       column-count: 4;
       column-gap: 18px;
       width: 100%;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.38s ease, transform 0.38s ease, filter 0.38s ease;
+    }
+
+    .gallery.is-away {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .portfolio-wall.is-reading .gallery {
+      display: none;
+    }
+
+    .project-intro {
+      display: none;
+      min-height: 58vh;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(52px, 10vw, 120px) 0;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .project-intro.is-visible {
+      display: grid;
+      animation: projectIntroIn 0.62s cubic-bezier(0.18, 0.72, 0.18, 1) both;
+    }
+
+    .project-copy {
+      max-width: 560px;
+    }
+
+    .project-count {
+      margin: 0 0 20px;
+      color: rgba(201, 198, 190, 0.52);
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      margin: 0 0 26px;
+      color: rgba(241, 239, 234, 0.92);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 650;
+      letter-spacing: 0;
+      line-height: 1;
+      text-transform: lowercase;
+    }
+
+    .project-description {
+      margin: 0;
+      color: rgba(241, 239, 234, 0.58);
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.7;
+    }
+
+    .project-enter {
+      margin-top: 34px;
+      border: 1px solid rgba(205, 200, 190, 0.22);
+      border-radius: 999px;
+      padding: 10px 15px;
+      background: rgba(241, 239, 234, 0.08);
+      color: rgba(241, 239, 234, 0.82);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      text-transform: lowercase;
+      transition: background 0.22s ease, transform 0.22s ease, color 0.22s ease;
+    }
+
+    .project-enter:hover {
+      background: rgba(241, 239, 234, 0.14);
+      color: rgba(241, 239, 234, 0.98);
+      transform: translateY(-1px);
+    }
+
+    @keyframes projectIntroIn {
+      0% {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .photo-card {
@@ -1022,6 +1206,12 @@
         margin-bottom: 34px;
       }
 
+      .project-panel,
+      .country-panel {
+        margin-top: 28px;
+      }
+
+      .project-list,
       .country-list {
         display: flex;
         gap: 14px;
@@ -1029,6 +1219,7 @@
         padding-bottom: 6px;
       }
 
+      .project-item,
       .country-filter {
         flex: 0 0 auto;
       }
@@ -1071,6 +1262,7 @@
 </head>
 
 <body>
+  <div class="active-trace" id="activeTrace" aria-hidden="true"></div>
   <div class="intro-loader" id="introLoader" aria-hidden="true">
     <div class="intro-shards" id="introShards"></div>
     <div class="intro-mark" aria-label="whitmanz.pics">
@@ -1111,13 +1303,21 @@
       <div class="portfolio-layout">
         <aside class="portfolio-sidebar" aria-label="portfolio filters">
           <p class="portfolio-name">whitmanz.pics</p>
-          <h2>Selected Works</h2>
+          <button class="selected-works is-active" id="selectedWorks" type="button">Selected Works</button>
           <p class="portfolio-note">travel frames in quiet light, collected by place and memory.</p>
+
+          <div class="project-panel">
+            <p class="project-kicker">working projects</p>
+            <div class="project-list" aria-label="future project categories">
+              <button class="project-item" type="button" data-project="water">water</button>
+              <button class="project-item" type="button" data-project="light">light</button>
+              <button class="project-item" type="button" data-project="frame">frame</button>
+            </div>
+          </div>
 
           <div class="country-panel">
             <p class="country-kicker">countries</p>
             <div class="country-list">
-              <button class="country-filter is-active" type="button" data-filter="all">all places</button>
               <button class="country-filter" type="button" data-filter="china">china</button>
               <button class="country-filter" type="button" data-filter="japan">japan</button>
               <button class="country-filter" type="button" data-filter="france">france</button>
@@ -1127,93 +1327,101 @@
         </aside>
 
         <div class="portfolio-wall" aria-label="photo gallery">
+          <div class="project-intro" id="projectIntro" aria-live="polite">
+            <div class="project-copy">
+              <p class="project-count" id="projectCount">working project</p>
+              <h3 class="project-title" id="projectTitle">water</h3>
+              <p class="project-description" id="projectDescription"></p>
+              <button class="project-enter" id="projectEnter" type="button">view photographs</button>
+            </div>
+          </div>
           <div class="gallery">
-          <button class="photo-card" data-country="monaco" data-city="monaco">
+          <button class="photo-card" data-country="monaco" data-city="monaco" data-project="water">
             <img loading="eager" decoding="async" fetchpriority="high" src="thumbs/monaco_2.jpeg" data-full="images/monaco_2.jpeg" alt="monaco photo">
             <span class="photo-title">monaco</span>
           </button>
 
-          <button class="photo-card" data-country="china" data-city="beijing">
+          <button class="photo-card" data-country="china" data-city="beijing" data-project="light">
             <img loading="eager" decoding="async" src="thumbs/beijing_1.jpeg" data-full="images/beijing_1.jpeg" alt="beijing photo">
             <span class="photo-title">beijing</span>
           </button>
 
-          <button class="photo-card" data-country="china" data-city="beijing">
+          <button class="photo-card" data-country="china" data-city="beijing" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/beijing_2.jpeg" data-full="images/beijing_2.jpeg" alt="beijing photo">
             <span class="photo-title">beijing</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kanazawa">
+          <button class="photo-card" data-country="japan" data-city="kanazawa" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/kanazawa_1.jpeg" data-full="images/kanazawa_1.jpeg" alt="kanazawa photo">
             <span class="photo-title">kanazawa</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kanazawa">
+          <button class="photo-card" data-country="japan" data-city="kanazawa" data-project="water">
             <img loading="eager" decoding="async" src="thumbs/kanazawa_2.jpeg" data-full="images/kanazawa_2.jpeg" alt="kanazawa photo">
             <span class="photo-title">kanazawa</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kyoto">
+          <button class="photo-card" data-country="japan" data-city="kyoto" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/kyoto_1.jpeg" data-full="images/kyoto_1.jpeg" alt="kyoto photo">
             <span class="photo-title">kyoto</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kyoto">
+          <button class="photo-card" data-country="japan" data-city="kyoto" data-project="light">
             <img loading="eager" decoding="async" src="thumbs/kyoto_2.jpeg" data-full="images/kyoto_2.jpeg" alt="kyoto photo">
             <span class="photo-title">kyoto</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kyoto">
+          <button class="photo-card" data-country="japan" data-city="kyoto" data-project="water">
             <img loading="eager" decoding="async" src="thumbs/kyoto_3.jpeg" data-full="images/kyoto_3.jpeg" alt="kyoto photo">
             <span class="photo-title">kyoto</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kyoto">
+          <button class="photo-card" data-country="japan" data-city="kyoto" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/kyoto_4.jpeg" data-full="images/kyoto_4.jpeg" alt="kyoto photo">
             <span class="photo-title">kyoto</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="kyoto">
+          <button class="photo-card" data-country="japan" data-city="kyoto" data-project="light">
             <img loading="eager" decoding="async" src="thumbs/kyoto_5.jpeg" data-full="images/kyoto_5.jpeg" alt="kyoto photo">
             <span class="photo-title">kyoto</span>
           </button>
 
-          <button class="photo-card" data-country="monaco" data-city="monaco">
+          <button class="photo-card" data-country="monaco" data-city="monaco" data-project="water">
             <img loading="eager" decoding="async" src="thumbs/monaco_1.jpeg" data-full="images/monaco_1.jpeg" alt="monaco photo">
             <span class="photo-title">monaco</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="nagahama">
+          <button class="photo-card" data-country="japan" data-city="nagahama" data-project="water">
             <img loading="eager" decoding="async" src="thumbs/nagahama_1.jpeg" data-full="images/nagahama_1.jpeg" alt="nagahama photo">
             <span class="photo-title">nagahama</span>
           </button>
 
-          <button class="photo-card" data-country="france" data-city="paris">
+          <button class="photo-card" data-country="france" data-city="paris" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/paris_1.jpeg" data-full="images/paris_1.jpeg" alt="paris photo">
             <span class="photo-title">paris</span>
           </button>
 
-          <button class="photo-card" data-country="france" data-city="paris">
+          <button class="photo-card" data-country="france" data-city="paris" data-project="light">
             <img loading="eager" decoding="async" src="thumbs/paris_2.jpeg" data-full="images/paris_2.jpeg" alt="paris photo">
             <span class="photo-title">paris</span>
           </button>
 
-          <button class="photo-card" data-country="france" data-city="paris">
+          <button class="photo-card" data-country="france" data-city="paris" data-project="light">
             <img loading="eager" decoding="async" src="thumbs/paris_3.jpeg" data-full="images/paris_3.jpeg" alt="paris photo">
             <span class="photo-title">paris</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="shimonada">
+          <button class="photo-card" data-country="japan" data-city="shimonada" data-project="light">
             <img loading="eager" decoding="async" src="thumbs/shimonada_1.jpeg" data-full="images/shimonada_1.jpeg" alt="shimonada photo">
             <span class="photo-title">shimonada</span>
           </button>
 
-          <button class="photo-card" data-country="japan" data-city="takayama">
+          <button class="photo-card" data-country="japan" data-city="takayama" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/takayama_1.jpeg" data-full="images/takayama_1.jpeg" alt="takayama photo">
             <span class="photo-title">takayama</span>
           </button>
 
-          <button class="photo-card" data-country="china" data-city="xi'an">
+          <button class="photo-card" data-country="china" data-city="xi'an" data-project="frame">
             <img loading="eager" decoding="async" src="thumbs/xian_1.jpeg" data-full="images/xian_1.jpeg" alt="xi'an photo">
             <span class="photo-title">xi'an</span>
           </button>
@@ -1293,8 +1501,19 @@
   </div>
 
   <script>
-    const cards = [...document.querySelectorAll('.photo-card')];
     const gallery = document.querySelector('.gallery');
+    const portfolioWall = document.querySelector('.portfolio-wall');
+    const activeTrace = document.getElementById('activeTrace');
+    const cards = [...document.querySelectorAll('.photo-card')]
+      .sort(() => Math.random() - 0.5);
+    cards.forEach(card => gallery.appendChild(card));
+    const selectedWorks = document.getElementById('selectedWorks');
+    const projectButtons = [...document.querySelectorAll('.project-item')];
+    const projectIntro = document.getElementById('projectIntro');
+    const projectTitle = document.getElementById('projectTitle');
+    const projectDescription = document.getElementById('projectDescription');
+    const projectCount = document.getElementById('projectCount');
+    const projectEnter = document.getElementById('projectEnter');
     const countryFilters = [...document.querySelectorAll('.country-filter')];
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
@@ -1308,6 +1527,22 @@
     const lightboxPrev = document.getElementById('lightboxPrev');
     const lightboxNext = document.getElementById('lightboxNext');
     let currentPhotoIndex = 0;
+    let currentPhotoSet = [];
+    let activeProject = null;
+    let projectMode = 'photos';
+    let activeControl = selectedWorks;
+
+    const projectInfo = {
+      water: {
+        text: 'A working sequence for surfaces, reflections, and the soft distortion that happens when a place is remembered through water.'
+      },
+      light: {
+        text: 'A study of passing light: windows, late afternoons, small highlights, and the quiet brightness that changes an ordinary frame.'
+      },
+      frame: {
+        text: 'A collection about edges, rooms, thresholds, and the way a photograph can hold a place by deciding what remains outside.'
+      }
+    };
 
     const countryNotes = {
       china: "beijing and xi'an, dense light and old stone.",
@@ -1321,11 +1556,13 @@
       return {
         country: card.dataset.country,
         city: card.dataset.city,
+        project: card.dataset.project,
         thumb: img.getAttribute('src'),
         full: img.getAttribute('data-full') || img.getAttribute('src'),
         alt: img.getAttribute('alt')
       };
     });
+    const photoByCard = new Map(cards.map((card, index) => [card, photos[index]]));
 
     document.querySelectorAll('img[data-full]').forEach(img => {
       img.addEventListener('error', () => {
@@ -1340,16 +1577,32 @@
     }
 
     function renderLightboxPhoto(index) {
-      currentPhotoIndex = (index + photos.length) % photos.length;
-      const photo = photos[currentPhotoIndex];
+      const collection = currentPhotoSet.length ? currentPhotoSet : photos;
+      currentPhotoIndex = (index + collection.length) % collection.length;
+      const photo = collection[currentPhotoIndex];
       setHeroPhoto(photo.thumb || photo.full);
       lightboxImage.src = photo.full;
       lightboxImage.alt = photo.alt;
       lightboxCaption.textContent = photo.city;
     }
 
-    function openLightbox(photo) {
-      const index = photos.findIndex(item => item.full === photo.full);
+    function renderRandomLightboxPhoto() {
+      const collection = currentPhotoSet.length ? currentPhotoSet : photos;
+      if (collection.length < 2) {
+        return;
+      }
+
+      let nextIndex = currentPhotoIndex;
+      while (nextIndex === currentPhotoIndex) {
+        nextIndex = Math.floor(Math.random() * collection.length);
+      }
+
+      renderLightboxPhoto(nextIndex);
+    }
+
+    function openLightbox(photo, collection = photos) {
+      currentPhotoSet = collection.length ? collection : photos;
+      const index = currentPhotoSet.findIndex(item => item.full === photo.full);
       renderLightboxPhoto(index >= 0 ? index : 0);
       lightbox.classList.add('active');
       document.body.classList.add('preview-open');
@@ -1369,6 +1622,12 @@
         image.decoding = 'async';
         image.src = photo.thumb;
       });
+    }
+
+    function visiblePhotos() {
+      return cards
+        .filter(card => !card.classList.contains('is-hidden'))
+        .map(card => photoByCard.get(card));
     }
 
     function createIntroShards() {
@@ -1400,15 +1659,150 @@
 
     cards.forEach((card, index) => {
       card.addEventListener('click', () => {
-        openLightbox(photos[index]);
+        openLightbox(photos[index], visiblePhotos());
       });
     });
 
-    function filterPortfolio(country) {
-      const matchingCards = [];
+    function setProjectActive(project) {
+      projectButtons.forEach(button => {
+        button.classList.toggle('is-active', button.dataset.project === project);
+      });
+    }
+
+    function setSelectedWorksActive(isActive) {
+      selectedWorks.classList.toggle('is-active', isActive);
+    }
+
+    function moveActiveTrace(target = activeControl, animate = true) {
+      if (!target) {
+        activeTrace.classList.remove('is-visible');
+        return;
+      }
+
+      const targetRect = target.getBoundingClientRect();
+      if (targetRect.bottom < 0 || targetRect.top > window.innerHeight) {
+        activeTrace.classList.remove('is-visible');
+        activeControl = target;
+        return;
+      }
+
+      const wallRect = portfolioWall.getBoundingClientRect();
+      const left = targetRect.right + 12;
+      const width = Math.max(32, wallRect.left - left - 24);
+      activeControl = target;
+      activeTrace.style.setProperty('--trace-left', `${left}px`);
+      activeTrace.style.setProperty('--trace-top', `${targetRect.top + targetRect.height / 2}px`);
+      activeTrace.style.setProperty('--trace-width', `${width}px`);
+
+      if (animate) {
+        activeTrace.classList.remove('is-visible');
+        requestAnimationFrame(() => activeTrace.classList.add('is-visible'));
+      } else {
+        activeTrace.classList.add('is-visible');
+      }
+    }
+
+    function hideProjectIntro() {
+      projectIntro.classList.remove('is-visible');
+      gallery.classList.remove('is-away');
+      portfolioWall.classList.remove('is-reading');
+    }
+
+    function showProjectIntro(project) {
+      const projectPhotos = photos.filter(photo => photo.project === project);
+      const info = projectInfo[project];
+      activeProject = project;
+      projectMode = 'intro';
+
+      projectTitle.textContent = project;
+      projectDescription.textContent = info.text;
+      projectCount.textContent = `${projectPhotos.length} photos`;
+      setProjectActive(project);
+      setSelectedWorksActive(false);
+      moveActiveTrace(projectButtons.find(button => button.dataset.project === project));
+      countryFilters.forEach(filter => filter.classList.remove('is-active'));
+      gallery.classList.add('is-away');
+      portfolioWall.classList.add('is-reading');
+      projectIntro.classList.add('is-visible');
+
+      if (projectPhotos[0]) {
+        setHeroPhoto(projectPhotos[0].thumb);
+      }
+    }
+
+    function showProjectPhotos(project) {
+      const projectPhotos = photos.filter(photo => photo.project === project);
+      activeProject = project;
+      projectMode = 'photos';
 
       cards.forEach(card => {
-        const isMatch = country === 'all' || card.dataset.country === country;
+        card.classList.toggle('is-hidden', card.dataset.project !== project);
+      });
+
+      setProjectActive(project);
+      setSelectedWorksActive(false);
+      moveActiveTrace(projectButtons.find(button => button.dataset.project === project));
+      countryFilters.forEach(filter => filter.classList.remove('is-active'));
+      hideProjectIntro();
+      currentPhotoSet = projectPhotos;
+
+      if (projectPhotos[0]) {
+        setHeroPhoto(projectPhotos[0].thumb);
+      }
+    }
+
+    projectButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const project = button.dataset.project;
+
+        if (activeProject === project && projectMode === 'intro') {
+          showProjectPhotos(project);
+          return;
+        }
+
+        showProjectIntro(project);
+      });
+    });
+
+    projectEnter.addEventListener('click', () => {
+      if (activeProject) {
+        showProjectPhotos(activeProject);
+      }
+    });
+
+    function showAllWorks() {
+      activeProject = null;
+      projectMode = 'photos';
+      setProjectActive(null);
+      setSelectedWorksActive(true);
+      moveActiveTrace(selectedWorks);
+      countryFilters.forEach(filter => filter.classList.remove('is-active'));
+      hideProjectIntro();
+
+      cards.forEach(card => {
+        card.classList.remove('is-hidden');
+      });
+
+      currentPhotoSet = photos;
+
+      if (photos[0]) {
+        setHeroPhoto(photos[0].thumb);
+      }
+    }
+
+    selectedWorks.addEventListener('click', showAllWorks);
+
+    function filterPortfolio(country) {
+      const matchingCards = [];
+      activeProject = null;
+      projectMode = 'photos';
+      setProjectActive(null);
+      setSelectedWorksActive(false);
+      moveActiveTrace(countryFilters.find(filter => filter.dataset.filter === country));
+      hideProjectIntro();
+
+      cards.forEach(card => {
+        const isMatch = card.dataset.country === country;
         card.classList.toggle('is-hidden', !isMatch);
 
         if (isMatch) {
@@ -1424,6 +1818,7 @@
       if (firstImage) {
         setHeroPhoto(firstImage.getAttribute('src'));
       }
+      currentPhotoSet = matchingCards.map(card => photoByCard.get(card));
     }
 
     countryFilters.forEach(filter => {
@@ -1459,7 +1854,7 @@
         button.type = 'button';
         button.setAttribute('aria-label', `open ${photo.city} photo`);
         button.innerHTML = `<img loading="eager" decoding="async" src="${photo.thumb}" alt="${photo.alt}">`;
-        button.addEventListener('click', () => openLightbox(photo));
+        button.addEventListener('click', () => openLightbox(photo, countryPhotos));
         previewGrid.appendChild(button);
       });
 
@@ -1502,18 +1897,47 @@
       if (event.key === 'ArrowRight') {
         renderLightboxPhoto(currentPhotoIndex + 1);
       }
+
+      if (event.key === ' ') {
+        event.preventDefault();
+        renderRandomLightboxPhoto();
+      }
     });
 
     window.addEventListener('DOMContentLoaded', () => {
       const introLoader = document.getElementById('introLoader');
+      const todayKey = new Date().toISOString().slice(0, 10);
+      const getIntroSeen = () => {
+        try {
+          return localStorage.getItem('whitmanzIntroSeen') === todayKey;
+        } catch {
+          return false;
+        }
+      };
+      const setIntroSeen = () => {
+        try {
+          localStorage.setItem('whitmanzIntroSeen', todayKey);
+        } catch {
+        }
+      };
+      const hasSeenIntro = getIntroSeen();
+      const introDelay = hasSeenIntro ? 820 : 3650;
       createIntroShards();
       preloadAllPhotos();
+      if (photos[0]) {
+        setHeroPhoto(photos[0].thumb);
+      }
       updateMapCounter('china', photos.filter(photo => photo.country === 'china'));
       setTimeout(() => {
         introLoader?.classList.add('is-done');
         document.body.classList.add('intro-complete');
-      }, 3650);
+        setIntroSeen();
+        moveActiveTrace(selectedWorks);
+      }, introDelay);
     });
+
+    window.addEventListener('resize', () => moveActiveTrace(activeControl, false));
+    window.addEventListener('scroll', () => moveActiveTrace(activeControl, false), { passive: true });
 
   </script>
 </body>
